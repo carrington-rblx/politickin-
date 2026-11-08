@@ -1137,3 +1137,23 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 @media(max-width:600px){
   .politickin-footer .radio-platform svg{width:29px!important;height:29px!important}
 }
+
+/* Fix the Radio icon: remove the button padding that was clipping the enlarged SVG. */
+.politickin-footer .radio-platform{
+  padding:0!important;
+  overflow:visible!important;
+}
+.politickin-footer .radio-platform svg{
+  display:block!important;
+  flex:0 0 auto;
+  width:29px!important;
+  height:29px!important;
+  max-width:none!important;
+  max-height:none!important;
+}
+@media(max-width:600px){
+  .politickin-footer .radio-platform svg{
+    width:27px!important;
+    height:27px!important;
+  }
+}
