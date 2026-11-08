@@ -255,3 +255,10 @@ body{background:#fff;color:#080808}
 /* Refine the header logo to a compact wordmark-sized footprint. */
 .site-header .header-logo{width:104px;max-height:30px}
 @media(max-width:560px){.site-header .header-logo{width:92px;max-height:27px}}
+
+
+/* Final header logo sizing and reliable rendering of the repository asset. */
+.site-header .wordmark{display:flex;align-items:center;flex:0 0 auto;line-height:0}
+.site-header .header-logo{display:block;width:140px;height:auto;max-height:26px;object-fit:contain;object-position:center}
+@media(max-width:850px){.site-header .header-logo{width:124px;max-height:24px}}
+@media(max-width:560px){.site-header .header-logo{width:112px;max-height:21px}}
