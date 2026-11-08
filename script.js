@@ -146,18 +146,47 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
 
   const load = async () => {
     try {
-      const loadScript = (src) => new Promise((resolve,reject) => {
-        const script=document.createElement('script');
-        script.src=src;script.async=true;
-        script.onload=resolve;script.onerror=()=>reject(new Error('Could not load map library: '+src));
-        document.head.appendChild(script);
-      });
+      const loadScript = async (sources) => {
+        if (typeof sources === 'string') sources = [sources];
+        let lastError;
+        for (const src of sources) {
+          try {
+            await new Promise((resolve,reject) => {
+              const script=document.createElement('script');
+              script.src=src;script.async=true;
+              script.onload=resolve;
+              script.onerror=()=>{script.remove();reject(new Error('Could not load '+src));};
+              document.head.appendChild(script);
+            });
+            return;
+          } catch (error) { lastError=error; }
+        }
+        throw lastError || new Error('All map library sources failed');
+      };
+      const loadJson = async (sources) => {
+        let lastError;
+        for (const src of sources) {
+          try {
+            const response=await fetch(src,{cache:'force-cache'});
+            if(!response.ok) throw new Error('Map data request failed ('+response.status+')');
+            return await response.json();
+          } catch(error) { lastError=error; }
+        }
+        throw lastError || new Error('All map data sources failed');
+      };
       await Promise.all([
-        window.topojson ? Promise.resolve() : loadScript('https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'),
-        window.d3?.geoAlbersUsa ? Promise.resolve() : loadScript('https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js')
+        window.topojson ? Promise.resolve() : loadScript([
+          'https://unpkg.com/topojson-client@3/dist/topojson-client.min.js',
+          'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'
+        ]),
+        window.d3?.geoAlbersUsa ? Promise.resolve() : loadScript([
+          'https://unpkg.com/d3-geo@3/dist/d3-geo.min.js',
+          'https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js'
+        ])
       ]);
-      const [topology]=await Promise.all([
-        fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r=>{if(!r.ok)throw new Error('Map data unavailable');return r.json();})
+      const topology=await loadJson([
+        'https://unpkg.com/us-atlas@3/states-10m.json',
+        'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'
       ]);
       const topo=window.topojson;
       const geo=window.d3;
@@ -216,7 +245,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
       svg.addEventListener('click',event=>{if(event.target===svg)setSelected(null);});
       loading?.classList.add('is-hidden');
     } catch(error) {
-      if(loading)loading.textContent='The map could not load. Please check your connection and refresh.';
+      if(loading)loading.textContent='The map could not load right now. Please refresh to try again.';
       console.error('Electoral map failed to initialize:',error);
     }
   };
