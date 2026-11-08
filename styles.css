@@ -984,3 +984,76 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
  .politickin-footer .footer-quicklinks a{font-size:15px}
  .politickin-footer .footer-legal{font-size:12px}
 }
+
+
+/* Follow Politickin' call-to-action. */
+.newsletter-section.follow-section{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:76px 24px 82px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#dcdcdc!important;
+  color:#080808!important;
+  text-align:center;
+}
+.follow-content{width:min(760px,100%);margin:0 auto}
+.follow-content h2{
+  margin:0 0 13px;
+  color:#080808;
+  font:800 clamp(34px,4.2vw,52px)/1.04 'Montserrat',sans-serif;
+  letter-spacing:-.055em;
+}
+.follow-content p{
+  margin:0 auto 25px;
+  max-width:650px;
+  color:#222;
+  font:400 15px/1.65 'Montserrat',sans-serif;
+}
+.follow-actions{display:flex;justify-content:center;gap:13px;flex-wrap:wrap}
+.follow-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:20px;
+  min-width:158px;min-height:48px;padding:0 24px;
+  border:1px solid #080808;border-radius:999px;
+  background:#080808;color:#fff;
+  font:700 11px/1 'Montserrat',sans-serif;letter-spacing:.1em;
+  transition:transform .24s ease,background .24s ease,color .24s ease,box-shadow .24s ease;
+}
+.follow-button span{font-size:15px;transition:transform .24s ease}
+.follow-button:hover,.follow-button:focus-visible{
+  background:transparent;color:#080808;transform:translateY(-3px);
+  box-shadow:0 7px 18px rgba(0,0,0,.12)
+}
+.follow-button:hover span,.follow-button:focus-visible span{transform:translate(3px,-2px)}
+@media(max-width:600px){
+ .newsletter-section.follow-section{padding:58px 20px 62px}
+ .follow-content h2{font-size:36px}
+ .follow-content p{font-size:13px;margin-bottom:22px}
+ .follow-actions{gap:10px}
+ .follow-button{min-width:138px;min-height:45px;font-size:10px}
+}
+
+/* Compact footer: lower the content while reducing the overall footer height. */
+.site-footer.politickin-footer{
+  min-height:0!important;
+  padding:148px 24px 42px!important;
+}
+.politickin-footer .footer-logo{width:138px;margin-bottom:60px}
+.politickin-footer .footer-socials{gap:11px;margin-bottom:21px}
+.politickin-footer .footer-socials a{width:40px;height:40px}
+.politickin-footer .footer-socials svg{width:21px;height:21px}
+.politickin-footer .footer-quicklinks{gap:21px;margin-bottom:25px}
+.politickin-footer .footer-quicklinks a{font-size:16px}
+.politickin-footer .footer-legal{font-size:13px}
+@media(max-width:600px){
+ .site-footer.politickin-footer{padding:108px 18px 34px!important}
+ .politickin-footer .footer-logo{width:124px;margin-bottom:47px}
+ .politickin-footer .footer-socials{gap:8px}
+ .politickin-footer .footer-socials a{width:36px;height:36px}
+ .politickin-footer .footer-socials svg{width:19px;height:19px}
+ .politickin-footer .footer-quicklinks{gap:11px 16px}
+ .politickin-footer .footer-quicklinks a{font-size:14px}
+ .politickin-footer .footer-legal{font-size:11px}
+}
