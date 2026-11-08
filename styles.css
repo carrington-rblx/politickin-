@@ -1057,3 +1057,8 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
  .politickin-footer .footer-quicklinks a{font-size:14px}
  .politickin-footer .footer-legal{font-size:11px}
 }
+
+
+/* Slightly increase Follow button label size. */
+.follow-button{font-size:12px}
+@media(max-width:600px){.follow-button{font-size:11px}}
