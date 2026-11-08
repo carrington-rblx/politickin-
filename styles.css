@@ -1303,3 +1303,7 @@ body:has(.news-analysis-hero) .national-section .browse-btn{
 
 /* Extend the hero underline through the plus sign in “News + Analysis”. */
 .news-analysis-hero-rule{width:4.05em!important;}
+
+
+/* Extend the News + Analysis underline farther to the right. */
+.news-analysis-hero-rule{width:5.2em!important;}
