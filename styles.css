@@ -1131,3 +1131,9 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 @media(max-width:600px){
   .politickin-footer .footer-logo{margin-bottom:39px!important}
 }
+
+/* Make the radio mark more prominent inside its footer button. */
+.politickin-footer .radio-platform svg{width:31px!important;height:31px!important}
+@media(max-width:600px){
+  .politickin-footer .radio-platform svg{width:29px!important;height:29px!important}
+}
