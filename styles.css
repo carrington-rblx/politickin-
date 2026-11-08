@@ -1299,3 +1299,7 @@ body:has(.news-analysis-hero) .national-section .browse-btn{
   .news-category-nav{gap:8px;margin-top:23px}
   .news-category-button{min-height:38px;padding:0 13px;font-size:10px}
 }
+
+
+/* Extend the hero underline through the plus sign in “News + Analysis”. */
+.news-analysis-hero-rule{width:4.05em!important;}
