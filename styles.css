@@ -1227,3 +1227,53 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   .intro-flying-word{animation:none!important}
   .politickin-intro.is-ending .intro-final{animation:none!important;opacity:1;transform:none;filter:none}
 }
+
+
+/* Cinematic intro refinement: larger type, readable back-and-forth travel, then a full-frame typography impact. */
+.intro-flying-word{
+  font-size:clamp(21px,var(--size),64px)!important;
+  font-weight:900!important;
+  color:#fff!important;
+  text-shadow:0 0 22px rgba(255,255,255,.2);
+  animation-name:intro-word-cross-screen!important;
+  animation-duration:var(--duration)!important;
+  animation-timing-function:cubic-bezier(.42,0,.58,1)!important;
+}
+@keyframes intro-word-cross-screen{
+  0%{transform:translate3d(var(--from),0,-140px) rotate(calc(var(--rotate)*-1)) scale(.82)}
+  50%{transform:translate3d(0,2vh,60px) rotate(0deg) scale(1.08)}
+  100%{transform:translate3d(var(--to),0,-140px) rotate(var(--rotate)) scale(.82)}
+}
+.politickin-intro.is-ending .intro-flying-word{
+  animation:intro-words-crash .62s cubic-bezier(.12,.72,.18,1) both!important;
+  opacity:1!important;
+}
+@keyframes intro-words-crash{
+  0%{transform:translate3d(var(--to),0,-140px) scale(.9);opacity:var(--opacity);filter:blur(0)}
+  72%{transform:translate3d(0,0,520px) scale(5.5);opacity:1;filter:blur(1px)}
+  100%{transform:translate3d(0,0,1250px) scale(15);opacity:1;filter:blur(5px)}
+}
+.politickin-intro.is-ending .intro-final{
+  animation:intro-logo-rush .92s cubic-bezier(.12,.72,.18,1) .42s both!important;
+}
+@keyframes intro-logo-rush{
+  0%{opacity:0;transform:scale(.12) translateZ(-900px);filter:blur(8px)}
+  24%{opacity:1;filter:blur(0)}
+  68%{opacity:1;transform:scale(1.08) translateZ(0)}
+  100%{opacity:1;transform:scale(4.6) translateZ(1050px);filter:blur(2px)}
+}
+.intro-white-flash{
+  position:absolute;inset:0;z-index:5;background:#fff;opacity:0;pointer-events:none;
+}
+.politickin-intro.is-ending .intro-white-flash{
+  animation:intro-white-takeover .68s ease 1.08s both!important;
+}
+@keyframes intro-white-takeover{
+  0%{opacity:0}
+  58%{opacity:1}
+  100%{opacity:1}
+}
+@media(max-width:600px){
+  .intro-flying-word{font-size:clamp(20px,var(--size),42px)!important}
+  .intro-final{font-size:clamp(25px,8vw,54px)!important}
+}
