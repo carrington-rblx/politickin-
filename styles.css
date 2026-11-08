@@ -912,3 +912,54 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 /* Slightly tighten the space above the creator feature. */
 .creator-section{padding-top:64px!important}
 @media(max-width:700px){.creator-section{padding-top:48px!important}}
+
+
+/* Minimal centered footer modeled on the supplied reference. */
+.site-footer.politickin-footer{
+  min-height:518px;
+  padding:104px 24px 88px;
+  background:#000!important;
+  color:#fff!important;
+  border-top:0!important;
+}
+.politickin-footer .footer-centered{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+}
+.politickin-footer .footer-logo{display:block;width:180px;max-width:48vw;margin:0 auto 76px}
+.politickin-footer .footer-logo img{display:block;width:100%;height:auto;max-height:74px;object-fit:contain}
+.politickin-footer .footer-socials{display:flex;align-items:center;justify-content:center;gap:15px;margin:0 0 25px}
+.politickin-footer .footer-socials a{
+  display:grid;place-items:center;width:50px;height:50px;border-radius:50%;
+  background:#1d1d1d;color:#fff;text-decoration:none;transition:background .2s ease,transform .2s ease;
+}
+.politickin-footer .footer-socials a:hover{background:#383838;transform:translateY(-2px)}
+.politickin-footer .footer-socials svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.politickin-footer .footer-socials .social-dot{fill:currentColor;stroke:none}
+.politickin-footer .footer-socials .social-fill{fill:currentColor;stroke:none}
+.politickin-footer .social-x{font:400 30px/1 Arial,sans-serif}
+.politickin-footer .social-threads{font:500 29px/1 Arial,sans-serif}
+.politickin-footer .social-tiktok{font:700 31px/1 Arial,sans-serif}
+.politickin-footer .social-facebook{font:700 30px/1 Arial,sans-serif}
+.politickin-footer .social-bluesky{font:700 26px/1 Arial,sans-serif}
+.politickin-footer .footer-quicklinks{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:25px;margin:0 0 32px}
+.politickin-footer .footer-quicklinks a{color:#fff;text-decoration:none;font:400 19px/1.35 'Montserrat',sans-serif;letter-spacing:-.02em}
+.politickin-footer .footer-quicklinks a:hover,.politickin-footer .footer-legal a:hover{text-decoration:underline;text-underline-offset:4px}
+.politickin-footer .footer-legal{color:#fff;font:400 16px/1.55 'Montserrat',sans-serif}
+.politickin-footer .footer-legal p{margin:0 0 8px}
+.politickin-footer .footer-legal a{color:#fff;text-underline-offset:4px}
+@media(max-width:600px){
+ .site-footer.politickin-footer{min-height:460px;padding:76px 18px 64px}
+ .politickin-footer .footer-logo{width:155px;margin-bottom:58px}
+ .politickin-footer .footer-socials{gap:9px;margin-bottom:24px}
+ .politickin-footer .footer-socials a{width:42px;height:42px}
+ .politickin-footer .footer-socials svg{width:22px;height:22px}
+ .politickin-footer .footer-quicklinks{gap:13px 20px;margin-bottom:27px}
+ .politickin-footer .footer-quicklinks a{font-size:16px}
+ .politickin-footer .footer-legal{font-size:13px}
+}
