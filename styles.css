@@ -236,3 +236,7 @@ body{background:#fff;color:#080808}
 
 /* Navigation tracking: 62% of the current font size (0.62em in CSS). */
 .site-header .main-nav a{letter-spacing:0.62em}
+
+
+/* Navigation links use subtle 0.62px letter spacing. */
+.site-header .main-nav a{letter-spacing:0.62px}
