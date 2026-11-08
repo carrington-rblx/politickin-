@@ -262,3 +262,12 @@ body{background:#fff;color:#080808}
 .site-header .header-logo{display:block;width:140px;height:auto;max-height:26px;object-fit:contain;object-position:center}
 @media(max-width:850px){.site-header .header-logo{width:124px;max-height:24px}}
 @media(max-width:560px){.site-header .header-logo{width:112px;max-height:21px}}
+
+
+/* Give article descriptions a little more room without shrinking the stories too far. */
+.national-section .article-row{padding:27px 0;gap:34px}
+.national-section .article-info h3{font-size:clamp(24px,2.45vw,32px);line-height:1.1;margin:10px 0 9px}
+.national-section .article-info p{font-size:14px;line-height:1.58;margin:0 0 12px}
+.national-section .article-photo{height:184px}
+@media(max-width:1100px){.national-section .article-row{gap:24px;padding:24px 0}.national-section .article-photo{height:165px}}
+@media(max-width:560px){.national-section .article-row{padding:19px 0;gap:12px}.national-section .article-info h3{font-size:22px;line-height:1.1;margin:8px 0}.national-section .article-info p{font-size:12px;line-height:1.5;margin-bottom:10px}.national-section .article-photo{height:auto;aspect-ratio:1.6}}
