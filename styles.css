@@ -278,3 +278,12 @@ body{background:#fff;color:#080808}
 .national-section .article-info p{font-size:13px;line-height:1.5;margin:0 0 10px}
 .national-section .article-row{padding:24px 0}
 @media(max-width:560px){.national-section .article-info h3{font-size:20px;margin:7px 0}.national-section .article-info p{font-size:11.5px;line-height:1.45;margin-bottom:9px}.national-section .article-row{padding:17px 0}}
+
+
+/* Push article headlines back further so the story descriptions have room to breathe. */
+.national-section .article-row{padding:34px 0;gap:38px}
+.national-section .article-info h3{font-size:clamp(21px,2vw,26px);line-height:1.14;margin:7px 0 9px}
+.national-section .article-info p{font-size:15px;line-height:1.65;margin:0 0 12px;max-width:680px}
+.national-section .article-photo{height:190px}
+@media(max-width:850px){.national-section .article-row{padding:28px 0;gap:24px}.national-section .article-info h3{font-size:23px}.national-section .article-info p{font-size:14px}.national-section .article-photo{height:165px}}
+@media(max-width:560px){.national-section .article-row{padding:22px 0;gap:12px}.national-section .article-info h3{font-size:19px;line-height:1.14;margin:6px 0 8px}.national-section .article-info p{font-size:13px;line-height:1.55;margin-bottom:10px}.national-section .article-photo{height:auto;aspect-ratio:1.6}}
