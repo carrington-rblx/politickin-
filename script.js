@@ -120,7 +120,8 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     stateNodes.forEach((node,abbr) => {
       const own = regionByState.get(abbr);
       node.classList.toggle('is-muted',!!selected && own !== selected);
-      node.classList.toggle('region-hover',!!selected && own === selected);\n      node.classList.toggle('is-selected-region',!!selected && own === selected);\n      if (own) node.style.setProperty('--region-color',own.color);
+      node.classList.toggle('region-hover',!!selected && own === selected);
+      node.classList.toggle('is-selected-region',!!selected && own === selected);\n      if (own) node.style.setProperty('--region-color',own.color);
     });
     labelNodes.forEach((node,abbr) => node.classList.toggle('is-hidden',!!selected && regionByState.get(abbr) === selected));
     borderNodes.forEach((node,id) => node.classList.toggle('region-dissolve',!!selected && id === selected.id));
