@@ -482,3 +482,7 @@ body{background:#fff;color:#080808}
 .site-header .nav-dropdown-menu::after{
   top:-8px;
 }
+
+
+/* Restore the dropdown spacing from before the latest adjustment. */
+.site-header .nav-dropdown-menu{top:calc(100% + 8px)}
