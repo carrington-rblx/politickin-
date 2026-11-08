@@ -1219,3 +1219,9 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   font-weight:700;
   font-size:clamp(7px,1.15vw,12px);
 }
+
+/* Give navigation links a bold pressed/focused state */
+.main-nav a:active,
+.main-nav a:focus-visible{
+  font-weight:900!important;
+}
