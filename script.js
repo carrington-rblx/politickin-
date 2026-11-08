@@ -94,14 +94,14 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   if (!svg || !legend || !info) return;
 
   const regions = [
-    {id:'PC',name:'Pacific',ev:81,color:'#2bb673',states:['WA','OR','CA','AK','HI'],details:['1 Class 1 Senate seat','1 Class 2 Senate seat','3 Congressional Districts']},
-    {id:'MW',name:'Mountain West',ev:49,color:'#d99b66',states:['NV','ID','MT','WY','UT','CO','AZ','NM'],details:['1 Class 2 Senate seat','1 Congressional District']},
-    {id:'PL',name:'Great Plains',ev:43,color:'#a55ea4',states:['ND','SD','NE','KS','OK','MN','IA','MO'],details:['1 Class 1 Senate seat','1 Congressional District']},
-    {id:'GF',name:'Gulf',ev:76,color:'#95c179',states:['TX','AR','LA','MS','AL'],details:['1 Class 1 Senate seat','2 Congressional Districts']},
-    {id:'GL',name:'Great Lakes',ev:68,color:'#2c5da9',states:['WI','IL','MI','IN','OH'],details:['1 Class 2 Senate seat','2 Congressional Districts']},
-    {id:'AP',name:'Appalachia',ev:68,color:'#598bbd',states:['KY','TN','WV','VA','PA'],details:['1 Class 1 Senate seat','2 Congressional Districts']},
-    {id:'CR',name:'Carolina',ev:71,color:'#b84e4e',states:['NC','SC','GA','FL'],details:['1 Class 2 Senate seat','2 Congressional Districts']},
-    {id:'NE',name:'New England',ev:75,color:'#be398b',states:['ME','NH','VT','MA','RI','CT','NY','NJ','DE','MD'],details:['1 Class 1 Senate seat','1 Class 2 Senate seat','2 Congressional Districts']}
+    {id:'PC',name:'Pacific',ev:81,color:'#2bb673',states:['WA','OR','CA','AK','HI'],senateClasses:[1,2],districts:3},
+    {id:'MW',name:'Mountain West',ev:49,color:'#d99b66',states:['NV','ID','MT','WY','UT','CO','AZ','NM'],senateClasses:[2],districts:1},
+    {id:'PL',name:'Great Plains',ev:43,color:'#a55ea4',states:['ND','SD','NE','KS','OK','MN','IA','MO'],senateClasses:[1],districts:1},
+    {id:'GF',name:'Gulf',ev:76,color:'#95c179',states:['TX','AR','LA','MS','AL'],senateClasses:[1],districts:2},
+    {id:'GL',name:'Great Lakes',ev:68,color:'#2c5da9',states:['WI','IL','MI','IN','OH'],senateClasses:[2],districts:2},
+    {id:'AP',name:'Appalachia',ev:68,color:'#598bbd',states:['KY','TN','WV','VA','PA'],senateClasses:[1],districts:2},
+    {id:'CR',name:'Carolina',ev:71,color:'#b84e4e',states:['NC','SC','GA','FL'],senateClasses:[2],districts:2},
+    {id:'NE',name:'New England',ev:75,color:'#be398b',states:['ME','NH','VT','MA','RI','CT','NY','NJ','DE','MD'],senateClasses:[1,2],districts:2}
   ];
   const fips = {1:'AL',2:'AK',4:'AZ',5:'AR',6:'CA',8:'CO',9:'CT',10:'DE',11:'DC',12:'FL',13:'GA',15:'HI',16:'ID',17:'IL',18:'IN',19:'IA',20:'KS',21:'KY',22:'LA',23:'ME',24:'MD',25:'MA',26:'MI',27:'MN',28:'MS',29:'MO',30:'MT',31:'NE',32:'NV',33:'NH',34:'NJ',35:'NM',36:'NY',37:'NC',38:'ND',39:'OH',40:'OK',41:'OR',42:'PA',44:'RI',45:'SC',46:'SD',47:'TN',48:'TX',49:'UT',50:'VT',51:'VA',53:'WA',54:'WV',55:'WI',56:'WY'};
   const regionByState = new Map(regions.flatMap(r => r.states.map(s => [s,r])));
@@ -125,9 +125,10 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     const sample = region.id === 'PC';
     const senators = sample ? californiaPreview.senators : [];
     const reps = sample ? californiaPreview.representatives : [];
+    const composition = '<div class="region-composition"><div class="directory-section-label">REGIONAL COMPOSITION</div><div class="composition-items">'+region.senateClasses.map(n=>'<span><b>1</b> U.S. Senate · Class '+n+'</span>').join('')+'<span><b>'+region.districts+'</b> Congressional '+(region.districts===1?'District':'Districts')+'</span></div></div>';
     const senatorCards = senators.map(person=>'<article class="member-card"><div class="member-card-top"><span class="member-role">U.S. SENATOR · '+person.class.toUpperCase()+'</span><span class="party-dot '+(person.party==='Republican'?'party-r':person.party==='Independent'?'party-i':'party-d')+'"></span></div><strong>'+person.name+'</strong><span class="member-party">'+person.party+'</span></article>').join('');
     const repRows = reps.map(person=>'<div class="rep-row"><span class="rep-district">'+person[0]+'</span><strong>'+person[1]+'</strong><span class="rep-party">'+person[2]+'</span></div>').join('');
-    info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">REGIONAL REPRESENTATION</span><h3>'+region.name+' <span>REGION</span></h3><p>'+region.states.length+' states · Select a state roster to explore its delegation</p></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div>'+
+    info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">REGIONAL REPRESENTATION</span><h3>'+region.name+' <span>REGION</span></h3><p>'+region.states.length+' states · Select a state roster to explore its delegation</p></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div>'+composition+
       (sample ? '<div class="directory-state"><div class="directory-state-heading"><h4>CALIFORNIA <span>CA</span></h4><span>DESIGN PREVIEW</span></div><div class="directory-section-label">UNITED STATES SENATE <span>2 MEMBERS</span></div><div class="senator-grid">'+senatorCards+'</div><div class="directory-section-label house-label">HOUSE OF REPRESENTATIVES <span>52 DISTRICTS</span></div><div class="rep-list">'+repRows+'</div></div><p class="directory-preview-note">Preview roster · Current officeholders · Additional state delegations will be added after the directory layout is approved.</p>' :
       '<div class="directory-placeholder"><strong>STATE DELEGATIONS</strong><p>'+region.states.join(' · ')+'</p><span>This is the proposed directory layout. Full senator and representative rosters for this region will be added after the design is approved.</span></div>');
   };
