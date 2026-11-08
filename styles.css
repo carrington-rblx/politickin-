@@ -718,12 +718,12 @@ body{background:#fff;color:#080808}
 
 
 /* National news: date-only metadata and restrained title-link hover treatment. */
-.national-section .story-meta.national-date{
-  font-size:10px;
-  line-height:1.4;
-  font-weight:600;
-  letter-spacing:.11em;
-  color:#c5c5c5;
+ .national-section .story-meta.national-date{
+  font-size:12px;
+  line-height:1.45;
+  font-weight:700;
+  letter-spacing:.1em;
+  color:#080808;
   margin-bottom:2px;
 }
 .national-section .article-info h3 a{
