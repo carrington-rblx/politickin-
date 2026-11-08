@@ -225,7 +225,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
 })();
 
 
-// Full-screen branded intro: flying newsroom words, a forward-rushing wordmark, and soundtrack.
+// Cinematic intro: the soundtrack runs under continuous back-and-forth word motion.
 (() => {
   const screen = document.getElementById('politickin-intro');
   if (!screen) return;
@@ -237,8 +237,10 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     'BREAKING NEWS','DEMOCRACY','THE PEOPLE','ACCOUNTABILITY','WASHINGTON',
     'ELECTIONS','THE SENATE','THE HOUSE','PUBLIC POLICY','YOUR VOICE',
     'THE TRUTH','POWER','FREEDOM','THE PEOPLE DESERVE TO KNOW','POLITICS',
-    'INDEPENDENT NEWS','THE VOTE','CIVIC POWER','THE BIG PICTURE','LIVE'
+    'INDEPENDENT NEWS','THE VOTE','CIVIC POWER','THE BIG PICTURE','LIVE',
+    'JUSTICE','THE CONSTITUTION','THE NATION','HOLD POWER ACCOUNTABLE'
   ];
+
   words.forEach((word,index) => {
     const item = document.createElement('span');
     item.className = 'intro-flying-word';
@@ -246,40 +248,51 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     item.style.setProperty('--x', ((index*37)%112-6)+'%');
     item.style.setProperty('--y', ((index*53)%108-4)+'%');
     item.style.setProperty('--size', (15+(index%5)*7)+'px');
-    item.style.setProperty('--duration', (1.5+(index%4)*.34)+'s');
-    item.style.setProperty('--delay', (index*.105)+'s');
+    item.style.setProperty('--duration', (2.2+(index%5)*.55)+'s');
+    item.style.setProperty('--delay', (-index*.31)+'s');
     item.style.setProperty('--rotate', ((index%7)-3)*8+'deg');
-    item.style.setProperty('--opacity', (.38+(index%4)*.13).toFixed(2));
+    item.style.setProperty('--opacity', (.42+(index%4)*.14).toFixed(2));
+    item.style.setProperty('--distance', (38+(index%4)*19)+'vw');
+    item.style.setProperty('--direction', index%2 ? '1' : '-1');
     field.appendChild(item);
   });
-  const flash = document.createElement('div');
-  flash.className = 'intro-white-flash';
-  screen.appendChild(flash);
 
   const startAudio = () => {
     if (!audio) return;
     audio.volume = .82;
     const attempt = audio.play();
-    if (attempt && typeof attempt.catch === 'function') {
-      attempt.catch(() => { if (prompt) prompt.hidden = false; });
+    if (attempt && typeof attempt.then === 'function') {
+      attempt.then(() => {
+        if (prompt) prompt.hidden = true;
+      }).catch(() => {
+        if (prompt) prompt.hidden = false;
+      });
     }
   };
-  startAudio();
-  soundButton?.addEventListener('click', () => {
-    startAudio();
+
+  const finishSequence = () => {
+    if (screen.classList.contains('is-ending')) return;
+    screen.classList.add('is-ending');
     if (prompt) prompt.hidden = true;
+    window.setTimeout(() => screen.remove(), 1250);
+  };
+
+  audio?.addEventListener('ended', finishSequence, { once:true });
+  audio?.addEventListener('error', () => {
+    if (prompt) {
+      prompt.hidden = false;
+      soundButton.textContent = 'RETRY SOUND';
+    }
   });
 
-  const finish = () => {
-    screen.classList.add('is-leaving');
-    window.setTimeout(() => {
-      screen.remove();
-      if (audio && !audio.paused) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    }, 760);
-  };
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  window.setTimeout(finish, reduced ? 1300 : 4650);
+  soundButton?.addEventListener('click', () => {
+    if (audio) {
+      audio.currentTime = 0;
+      startAudio();
+    }
+  });
+
+  // Attempt immediate playback. If the browser blocks autoplay, the intro waits
+  // for the visitor's tap and then runs for the full length of the soundtrack.
+  startAudio();
 })();
