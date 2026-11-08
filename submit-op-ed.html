@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Submit an Op-Ed to Politickin'." />
+  <meta name="description" content="Submit an Op-Ed to Politickin' and track its editorial status." />
   <title>Submit an Op-Ed | Politickin'</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,24 +14,42 @@
     html,body{min-height:100%;background:#000!important}
     body.submit-op-ed-page{background:#000!important;color:#fff}
     .submit-op-ed-page .site-header{background:#000!important}
-    .submit-op-ed-main{min-height:calc(100vh - 100px);background:#000;color:#fff}
-    .submit-op-ed-hero{
-      width:100%;background:#000;color:#fff;
-      padding:clamp(76px,10vw,126px) 28px clamp(68px,8vw,96px);
-    }
-    .submit-op-ed-hero-inner{width:min(1120px,100%);margin:0 auto}
-    .submit-op-ed-hero h1{
-      margin:0;color:#fff;
-      font:900 clamp(42px,7vw,76px)/.98 'Montserrat',sans-serif;
-      letter-spacing:-.065em;
-    }
+    .submit-op-ed-main{background:#000;color:#fff;padding-bottom:80px}
+    .submit-op-ed-hero{width:100%;background:#000;color:#fff;padding:clamp(58px,7.5vw,100px) 28px 44px}
+    .submit-op-ed-hero-inner,.op-ed-content{width:min(1040px,calc(100% - 44px));margin:0 auto}
+    .submit-op-ed-hero h1{margin:0;color:#fff;font:900 clamp(42px,7vw,76px)/.98 'Montserrat',sans-serif;letter-spacing:-.065em}
     .submit-op-ed-hero-rule{width:7em;height:7px;margin-top:24px;background:#dcdcdc}
+    .op-ed-content{font-size:15px;line-height:1.75;color:#e4e4e4}
+    .op-ed-content p{max-width:900px}
+    .op-ed-content h2{font:800 clamp(24px,3vw,34px)/1.1 'Montserrat',sans-serif;letter-spacing:-.04em;margin:42px 0 16px;color:#fff}
+    .op-ed-content h3{font:800 17px 'Montserrat',sans-serif;margin:22px 0 8px;color:#fff}
+    .op-ed-content li{padding:3px 0}
+    .op-ed-lists{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+    .op-ed-submit-cta{margin:42px 0 48px}
+    .op-ed-submit-cta button,.portal-button{background:#dcdcdc;color:#050505;border:0;padding:15px 24px;font-weight:900;letter-spacing:.06em;cursor:pointer}
+    .op-ed-submit-cta button:hover,.portal-button:hover{background:#fff}
+    .past-opeds-heading{font:800 23px 'Montserrat',sans-serif;margin:0 0 14px}
+    .past-opeds-area{min-height:180px;background:#fff;color:#111;padding:24px;border-radius:2px}
+    .portal-panel{display:none;margin:25px 0 0;padding:26px;background:#111;border:1px solid #393939}
+    .portal-panel.is-open{display:block}
+    .portal-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+    .portal-tabs button{background:transparent;color:#ddd;border:1px solid #555;padding:10px 15px;cursor:pointer}
+    .portal-tabs button[aria-pressed="true"]{background:#dcdcdc;color:#000;border-color:#dcdcdc}
+    .portal-form{display:grid;gap:13px;max-width:760px}
+    .portal-form label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#ccc}
+    .portal-form input,.portal-form textarea{width:100%;background:#050505;color:#fff;border:1px solid #555;padding:13px;font:inherit}
+    .portal-form textarea{min-height:230px;resize:vertical}
+    .portal-form input:focus,.portal-form textarea:focus{outline:2px solid #dcdcdc;outline-offset:1px}
+    .portal-note,.portal-status{font-size:12px;color:#aaa}
+    .portal-message{min-height:20px;color:#dcdcdc;font-size:13px}
+    .submission-list{display:grid;gap:12px;margin-top:20px}
+    .submission-card{padding:16px;border:1px solid #444;background:#090909}
+    .submission-card h3{margin:0 0 8px}
+    .status-pill{display:inline-block;padding:4px 9px;background:#333;color:#fff;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .status-pill.accepted{background:#214d35}.status-pill.declined{background:#592a2a}.status-pill.under-review{background:#55471f}
+    .past-opeds-empty{color:#666}
     .submit-op-ed-page .site-footer{background:#000!important}
-    @media(max-width:600px){
-      .submit-op-ed-hero{padding:68px 22px 60px}
-      .submit-op-ed-hero h1{font-size:clamp(38px,10vw,54px)}
-      .submit-op-ed-hero-rule{height:6px;margin-top:20px}
-    }
+    @media(max-width:650px){.submit-op-ed-hero{padding:54px 22px 36px}.submit-op-ed-hero-inner,.op-ed-content{width:calc(100% - 36px)}.submit-op-ed-hero h1{font-size:clamp(38px,10vw,54px)}.op-ed-lists{grid-template-columns:1fr;gap:0}.portal-panel{padding:18px}.op-ed-content{font-size:14px}}
   </style>
 </head>
 <body class="submit-op-ed-page">
@@ -45,25 +63,57 @@
   <div class="header-actions"><a class="btn btn-light btn-small" href="./index.html#support">DONATE</a><a class="btn btn-outline btn-small" href="./index.html#newsletter">SIGN UP</a></div>
 </header>
 <main class="submit-op-ed-main" id="submit-op-ed">
-  <section class="submit-op-ed-hero" aria-labelledby="submit-op-ed-title">
-    <div class="submit-op-ed-hero-inner">
-      <h1 id="submit-op-ed-title">Submit an Op-Ed to POLITICKIN'</h1>
-      <div class="submit-op-ed-hero-rule" aria-hidden="true"></div>
+  <section class="submit-op-ed-hero" aria-labelledby="submit-op-ed-title"><div class="submit-op-ed-hero-inner"><h1 id="submit-op-ed-title">Submit an Op-Ed to POLITICKIN'</h1><div class="submit-op-ed-hero-rule" aria-hidden="true"></div></div></section>
+  <section class="op-ed-content">
+    <p>We are always looking for elected officials, candidates, party members, and other thought leaders to write thought-provoking op-eds about the challenges and opportunities that Americans are facing.</p>
+    <p>Specifically, we are looking to amplify voices on topics like:</p>
+    <ul>
+      <li>Threats to our rights and freedoms</li><li>Threats to our democracy</li><li>Opposing authoritarianism and oligarchy</li><li>Explaining key things that are happening internally in parties</li><li>Exploring potential failures of the political establishment</li><li>Reflections on and insights into how the Progressive Party can move forward in the first Wadgerbadger era</li><li>Calling out dangerous extremism, bad actors, and bad actions in the political sphere that people may be unaware of.</li>
+    </ul>
+    <h2>What we're looking for from an op-ed</h2>
+    <div class="op-ed-lists">
+      <div><h3>Things we like:</h3><ul><li>Concise and focused pieces between 600 and 1,000 words</li><li>Relevant and timely content</li><li>A clear, structured argument or main point</li><li>A unique perspective</li><li>An eye toward explaining how this specific argument has implications on the american people</li></ul></div>
+      <div><h3>Things we don't like:</h3><ul><li>Lack of structure or focus</li><li>Overly broad content (i.e. discussing lots of different issues)</li><li>Niche content (i.e. focusing solely on one piece of legislation or a hyperlocal issue)</li><li>Self-promotional pieces</li><li>Intentionally inflammatory, libelous, or discriminatory language</li></ul></div>
     </div>
+    <div class="op-ed-submit-cta"><button id="open-writer-portal" type="button">SUBMIT AN OP-ED</button></div>
+    <section class="portal-panel" id="writer-portal" aria-labelledby="writer-portal-title">
+      <h2 id="writer-portal-title">Writer Portal</h2>
+      <p class="portal-note">Create an account with your Roblox username and a new Politickin' password. This is not your Roblox password. We do not ask for your Roblox password, email address, or phone number. If you forget your Politickin' password, you must contact a site administrator for help; there is no automatic password reset.</p>
+      <div id="writer-auth-area">
+        <div class="portal-tabs"><button type="button" data-auth-mode="signup" aria-pressed="true">Create account</button><button type="button" data-auth-mode="login" aria-pressed="false">Sign in</button></div>
+        <form class="portal-form" id="writer-auth-form">
+          <label>Roblox username<input name="username" autocomplete="username" minlength="3" maxlength="20" required /></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" required /></label>
+          <label id="confirm-password-label">Confirm password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required /></label>
+          <button class="portal-button" type="submit" id="writer-auth-submit">CREATE ACCOUNT</button>
+        </form>
+      </div>
+      <div id="writer-workspace" hidden>
+        <p id="writer-welcome"></p>
+        <h3>Submit a new op-ed</h3>
+        <form class="portal-form" id="op-ed-submission-form">
+          <label>Headline<input name="title" maxlength="180" required /></label>
+          <label>Short summary<input name="summary" maxlength="300" required /></label>
+          <label>Your op-ed<textarea name="body" minlength="200" required></textarea></label>
+          <button class="portal-button" type="submit">SEND FOR REVIEW</button>
+        </form>
+        <h3>Your submissions</h3><div class="submission-list" id="writer-submissions"></div>
+        <button class="portal-button" id="writer-signout" type="button">SIGN OUT</button>
+      </div>
+      <p class="portal-message" id="writer-portal-message" role="status" aria-live="polite"></p>
+    </section>
+    <h2 class="past-opeds-heading">View past op-eds below:</h2>
+    <div class="past-opeds-area" id="published-opeds"><p class="past-opeds-empty">Published op-eds will appear here.</p></div>
   </section>
 </main>
 <footer class="site-footer politickin-footer" id="support">
-  <div class="footer-centered">
-    <a class="footer-logo" href="./index.html" aria-label="Politickin' home"><img src="./Politickin%27%20WHITE.png" alt="Politickin'"/></a>
-    <div class="footer-socials footer-platforms" aria-label="Politickin' platforms">
-      <a class="footer-platform republic-platform" href="./index.html#newsletter" aria-label="Republic"><img src="./REPUBLIC%20LOGO.png" alt="Republic"/></a>
-      <a class="footer-platform radio-platform" href="./index.html#newsletter" aria-label="Radio"><svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M5 12.5h22a2.5 2.5 0 0 1 2.5 2.5v11A2.5 2.5 0 0 1 27 28.5H5A2.5 2.5 0 0 1 2.5 26V15A2.5 2.5 0 0 1 5 12.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 15-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="20.5" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 18h4M21 22h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
-    </div>
-    <nav class="footer-quicklinks" aria-label="Footer navigation"><a href="./index.html#support">Privacy</a><a href="./index.html#about">About</a><a href="./index.html#support">Careers</a><a href="./submit-op-ed.html">Submit</a><a href="./index.html#support">Contact</a></nav>
-    <div class="footer-legal"><p>© 2026 POLITICKIN'. All rights reserved.</p></div>
+  <div class="footer-centered"><a class="footer-logo" href="./index.html" aria-label="Politickin' home"><img src="./Politickin%27%20WHITE.png" alt="Politickin'"/></a>
+    <div class="footer-socials footer-platforms" aria-label="Politickin' platforms"><a class="footer-platform republic-platform" href="./index.html#newsletter" aria-label="Republic"><img src="./REPUBLIC%20LOGO.png" alt="Republic"/></a><a class="footer-platform radio-platform" href="./index.html#newsletter" aria-label="Radio"><svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M5 12.5h22a2.5 2.5 0 0 1 2.5 2.5v11A2.5 2.5 0 0 1 27 28.5H5A2.5 2.5 0 0 1 2.5 26V15A2.5 2.5 0 0 1 5 12.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 15-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="20.5" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 18h4M21 22h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+    <nav class="footer-quicklinks" aria-label="Footer navigation"><a href="./index.html#support">Privacy</a><a href="./index.html#about">About</a><a href="./index.html#support">Careers</a><a href="./submit-op-ed.html">Submit</a><a href="./index.html#support">Contact</a></nav><div class="footer-legal"><p>© 2026 POLITICKIN'. All rights reserved.</p></div>
   </div>
 </footer>
 <div class="toast" role="status" aria-live="polite"></div>
-<script src="./script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+<script src="./supabase-config.js"></script><script src="./script.js"></script><script src="./writer-portal.js"></script>
 </body>
 </html>
