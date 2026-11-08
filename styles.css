@@ -203,9 +203,9 @@ body{background:#fff;color:#080808}
 }
 
 
-/* Keep the wordmark, navigation, and action buttons in a compact header group. */
-.site-header{justify-content:flex-start;gap:clamp(20px,2.4vw,34px);padding-left:max(24px,calc((100% - 1160px)/2));padding-right:max(24px,calc((100% - 1160px)/2))}
-.site-header .main-nav{flex:0 1 auto;justify-content:flex-start;gap:clamp(16px,1.7vw,24px);margin:0}
-.site-header .header-actions{margin-left:auto;gap:12px}
-@media(max-width:850px){.site-header{justify-content:space-between;gap:14px;padding-inline:25px}.site-header .main-nav{margin:0}.site-header .header-actions{margin-left:0}}
+/* Keep the complete header group centered, with tighter spacing between logo, nav, and actions. */
+.site-header{justify-content:center;gap:26px;padding-left:24px;padding-right:24px}
+.site-header .main-nav{flex:0 1 auto;justify-content:flex-start;gap:22px;margin:0}
+.site-header .header-actions{margin-left:0;gap:12px}
+@media(max-width:850px){.site-header{justify-content:space-between;gap:14px;padding-inline:25px}.site-header .main-nav{margin:0}}
 @media(max-width:560px){.site-header{padding-inline:18px}}
