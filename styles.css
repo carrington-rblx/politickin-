@@ -1177,27 +1177,31 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 }
 
 
-/* Politickin' cinematic word-flight intro */
+/* Politickin' cinematic intro: continuous word traffic, then a final forward rush. */
 .politickin-intro{
   position:fixed;inset:0;z-index:99999;overflow:hidden;
   display:grid;place-items:center;background:#050505;color:#fff;
   opacity:1;visibility:visible;isolation:isolate;
 }
-.politickin-intro.is-leaving{animation:intro-screen-out .72s ease-in forwards}
-.intro-word-field{position:absolute;inset:-12%;overflow:hidden;perspective:900px}
+.intro-word-field{position:absolute;inset:-12%;overflow:hidden;perspective:1000px}
 .intro-flying-word{
   position:absolute;left:var(--x);top:var(--y);white-space:nowrap;
-  color:rgba(255,255,255,.82);font:800 var(--size)/1 'Montserrat',sans-serif;
-  letter-spacing:-.055em;opacity:0;will-change:transform,opacity;
+  color:rgba(255,255,255,.86);font:800 var(--size)/1 'Montserrat',sans-serif;
+  letter-spacing:-.055em;opacity:var(--opacity);will-change:transform;
   text-shadow:0 0 18px rgba(255,255,255,.12);
-  animation:intro-word-flight var(--duration) cubic-bezier(.2,.65,.25,1) var(--delay) both;
+  animation:intro-word-back-forth var(--duration) ease-in-out var(--delay) infinite alternate;
 }
 .intro-final{
   position:relative;z-index:2;white-space:nowrap;text-align:center;
   color:#fff;font:900 clamp(27px,7.5vw,94px)/.95 'Montserrat',sans-serif;
-  letter-spacing:-.075em;opacity:0;transform:translateZ(-900px) scale(.16);
-  text-shadow:0 0 28px rgba(255,255,255,.2);
-  animation:intro-logo-rush 1.05s cubic-bezier(.12,.72,.18,1) 2.95s both;
+  letter-spacing:-.075em;opacity:0;transform:scale(.12) translateZ(-900px);
+  filter:blur(8px);text-shadow:0 0 28px rgba(255,255,255,.22);
+}
+.politickin-intro.is-ending .intro-flying-word{
+  animation-play-state:paused;transition:opacity .22s ease;opacity:0!important;
+}
+.politickin-intro.is-ending .intro-final{
+  animation:intro-logo-rush 1.05s cubic-bezier(.12,.72,.18,1) both;
 }
 .intro-sound-prompt{position:absolute;z-index:4;bottom:28px;left:0;right:0;text-align:center}
 .intro-sound-prompt button{
@@ -1205,22 +1209,21 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   padding:10px 17px;background:rgba(0,0,0,.35);color:#fff;
   font:700 10px/1 'Montserrat',sans-serif;letter-spacing:.14em;cursor:pointer;
 }
-.intro-white-flash{position:absolute;inset:0;z-index:3;background:#fff;opacity:0;pointer-events:none;animation:intro-flash .48s ease 3.93s both}
-@keyframes intro-word-flight{
-  0%{opacity:0;transform:translate3d(-18vw,8vh,-500px) rotate(var(--rotate)) scale(.45)}
-  12%{opacity:var(--opacity)}
-  48%{opacity:var(--opacity);transform:translate3d(12vw,-5vh,100px) rotate(calc(var(--rotate)*-.45)) scale(1.08)}
-  100%{opacity:0;transform:translate3d(115vw,15vh,-180px) rotate(var(--rotate)) scale(.7)}
+.intro-white-flash{position:absolute;inset:0;z-index:3;background:#fff;opacity:0;pointer-events:none}
+.politickin-intro.is-ending .intro-white-flash{animation:intro-flash .42s ease .82s both}
+@keyframes intro-word-back-forth{
+  0%{transform:translate3d(calc(var(--distance)*-1*var(--direction)),0,-120px) rotate(calc(var(--rotate)*-1)) scale(.82)}
+  50%{transform:translate3d(0,2vh,80px) rotate(0deg) scale(1.08)}
+  100%{transform:translate3d(calc(var(--distance)*var(--direction)),0,-120px) rotate(var(--rotate)) scale(.82)}
 }
 @keyframes intro-logo-rush{
-  0%{opacity:0;transform:translateZ(-900px) scale(.16);filter:blur(9px)}
+  0%{opacity:0;transform:scale(.12) translateZ(-900px);filter:blur(8px)}
   28%{opacity:1;filter:blur(0)}
-  78%{opacity:1;transform:translateZ(0) scale(1.03)}
-  100%{opacity:1;transform:translateZ(850px) scale(3.6);filter:blur(1px)}
+  76%{opacity:1;transform:scale(1.02) translateZ(0)}
+  100%{opacity:1;transform:scale(3.8) translateZ(850px);filter:blur(1px)}
 }
 @keyframes intro-flash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}
-@keyframes intro-screen-out{to{opacity:0;visibility:hidden}}
 @media(prefers-reduced-motion:reduce){
-  .intro-flying-word,.intro-final,.intro-white-flash,.politickin-intro.is-leaving{animation:none!important}
-  .intro-final{opacity:1;transform:none}
+  .intro-flying-word{animation:none!important}
+  .politickin-intro.is-ending .intro-final{animation:none!important;opacity:1;transform:none;filter:none}
 }
