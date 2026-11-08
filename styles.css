@@ -187,3 +187,17 @@ body{background:#fff;color:#080808}
  .series-name{font-size:13px}
  .series-show{font-size:9px}
 }
+
+
+/* Final header refinements */
+.site-header{height:100px;padding-top:0;padding-bottom:0}
+.site-header .main-nav a,.site-header .btn-small{font-family:'Montserrat',sans-serif}
+.site-header .main-nav a{font-weight:600;letter-spacing:-.035em}
+@media(max-width:850px){
+ .site-header{height:86px}
+ .site-header .main-nav{top:86px}
+}
+@media(max-width:560px){
+ .site-header{height:76px}
+ .site-header .main-nav{top:76px}
+}
