@@ -1169,3 +1169,9 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
     height:24px!important;
   }
 }
+
+/* Slightly enlarge the Republic logo within its footer button. */
+.politickin-footer .republic-platform img{max-height:44px!important}
+@media(max-width:600px){
+  .politickin-footer .republic-platform img{max-height:40px!important}
+}
