@@ -43,11 +43,19 @@ navigation?.querySelectorAll('a').forEach((link) => {
 
 const setActiveNavigationLink = () => {
   const currentHash = window.location.hash;
-  if (!currentHash) return;
-  const matchingLink = [...(navigation?.querySelectorAll('.nav-link') || [])]
-    .find((link) => link.getAttribute('href') === currentHash);
+  const currentPath = window.location.pathname.replace(/\\/$/, '') || '/';
+  const links = [...(navigation?.querySelectorAll('.nav-link') || [])];
+  const matchingLink = (currentHash
+    ? links.find((link) => {
+        const target = new URL(link.href, window.location.href);
+        return target.pathname.replace(/\\/$/, '') === currentPath && target.hash === currentHash;
+      })
+    : null) || links.find((link) => {
+      const target = new URL(link.href, window.location.href);
+      return target.pathname.replace(/\\/$/, '') === currentPath && !target.hash && target.pathname !== new URL('./index.html', window.location.href).pathname;
+    });
   if (matchingLink) {
-    navigation.querySelectorAll('.nav-link').forEach((item) => item.classList.remove('is-active'));
+    links.forEach((item) => item.classList.remove('is-active'));
     matchingLink.classList.add('is-active');
   }
 };
