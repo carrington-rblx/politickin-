@@ -849,3 +849,22 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   .creator-story h3{font-size:29px}
   .creator-story p{font-size:13px}
 }
+
+
+/* Match National News + Analysis headlines to the bold Montserrat treatment used by the lead story. */
+.national-section .article-info h3{
+  font-family:'Montserrat',sans-serif!important;
+  font-size:clamp(21px,2.05vw,27px);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+.national-section .article-info h3 a{
+  font:inherit;
+}
+@media(max-width:560px){
+  .national-section .article-info h3{
+    font-size:20px;
+    line-height:1.12;
+  }
+}
