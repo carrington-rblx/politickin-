@@ -1087,3 +1087,26 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 .politickin-footer .radio-platform{font-size:0!important;letter-spacing:0!important;}
 .politickin-footer .radio-platform svg{display:block;width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 @media(max-width:600px){.politickin-footer .republic-platform img{max-height:32px!important;}.politickin-footer .radio-platform svg{width:24px;height:24px;}}
+
+
+/* Fine-tune footer platform marks to fit their pills cleanly. */
+.politickin-footer .republic-platform{padding:5px 12px!important;overflow:hidden}
+.politickin-footer .republic-platform img{
+  width:100%!important;
+  height:100%!important;
+  max-height:38px!important;
+  object-fit:contain!important;
+}
+.politickin-footer .radio-platform{padding:8px 17px!important;overflow:hidden}
+.politickin-footer .radio-platform svg{
+  width:21px!important;
+  height:21px!important;
+  max-width:100%;
+  max-height:100%;
+}
+@media(max-width:600px){
+  .politickin-footer .republic-platform{padding:4px 10px!important}
+  .politickin-footer .republic-platform img{max-height:34px!important}
+  .politickin-footer .radio-platform{padding:7px 14px!important}
+  .politickin-footer .radio-platform svg{width:19px!important;height:19px!important}
+}
