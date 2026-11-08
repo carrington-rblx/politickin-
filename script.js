@@ -7,13 +7,52 @@ menuButton?.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
 });
 
+const navDropdown = navigation?.querySelector('.nav-dropdown');
+const newsAnalysisLink = navDropdown?.querySelector('.nav-link');
+
+newsAnalysisLink?.addEventListener('click', (event) => {
+  if (window.matchMedia('(max-width: 850px)').matches && !navDropdown.classList.contains('open')) {
+    event.preventDefault();
+    navDropdown.classList.add('open');
+    newsAnalysisLink.setAttribute('aria-expanded', 'true');
+  }
+});
+
 navigation?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
-    navigation.classList.remove('open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-    menuButton?.setAttribute('aria-label', 'Open navigation');
+    if (link.closest('.nav-dropdown-menu')) {
+      const toast = document.querySelector('.toast');
+      if (toast) {
+        toast.textContent = 'Op-ed submissions are coming soon.';
+        toast.classList.add('show');
+        window.setTimeout(() => toast.classList.remove('show'), 2200);
+      }
+    } else if (link.classList.contains('nav-link')) {
+      navigation.querySelectorAll('.nav-link').forEach((item) => item.classList.remove('is-active'));
+      link.classList.add('is-active');
+    }
+    if (!link.closest('.nav-dropdown-menu')) {
+      navigation.classList.remove('open');
+      navDropdown?.classList.remove('open');
+      newsAnalysisLink?.setAttribute('aria-expanded', 'false');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menuButton?.setAttribute('aria-label', 'Open navigation');
+    }
   });
 });
+
+const setActiveNavigationLink = () => {
+  const currentHash = window.location.hash;
+  if (!currentHash) return;
+  const matchingLink = [...(navigation?.querySelectorAll('.nav-link') || [])]
+    .find((link) => link.getAttribute('href') === currentHash);
+  if (matchingLink) {
+    navigation.querySelectorAll('.nav-link').forEach((item) => item.classList.remove('is-active'));
+    matchingLink.classList.add('is-active');
+  }
+};
+window.addEventListener('hashchange', setActiveNavigationLink);
+setActiveNavigationLink();
 
 const newsletterForm = document.querySelector('#newsletter-form');
 const formStatus = document.querySelector('.form-status');
