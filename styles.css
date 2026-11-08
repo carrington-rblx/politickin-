@@ -228,3 +228,7 @@ body{background:#fff;color:#080808}
 /* Header type weights: navigation Medium, action buttons Semibold. */
 .site-header .main-nav a{font-family:'Montserrat',sans-serif;font-weight:500}
 .site-header .header-actions,.site-header .btn,.site-header .btn-small{font-family:'Montserrat',sans-serif;font-weight:600}
+
+
+/* Navigation links: Montserrat Regular. */
+.site-header .main-nav a{font-family:'Montserrat',sans-serif;font-weight:400}
