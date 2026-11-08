@@ -109,17 +109,18 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   let selected = null, stateNodes = new Map(), labelNodes = new Map(), totalNodes = new Map(), borderNodes = new Map(), stateFeatures = new Map();
   const el = (tag,attrs={},parent=svg) => {const node=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,v));parent.appendChild(node);return node;};
   const makeInfo = (region) => {
+    const intro = document.getElementById('network-intro');
     if (!region) {
-      info.innerHTML='<div class="region-info-empty"><span class="region-info-mark">+</span><div><strong>EXPLORE THE REGIONS</strong><p>Select a region on the map or in the key to see its total regional Senate and House representation.</p></div></div>';
+      info.classList.remove('is-open');
+      if (intro) intro.hidden = false;
+      info.innerHTML='';
       return;
     }
-    const senateSeats = region.senateClasses.length;
-    const representativeSeats = region.districts;
-    const senateCards = region.senateClasses.map((seatClass,index)=>'<article class="member-card"><div class="member-card-top"><span class="member-role">REGIONAL SENATE SEAT</span><span class="party-dot party-i"></span></div><strong>Senate · Class '+seatClass+'</strong><span class="member-party">1 seat for this region</span></article>').join('');
-    const composition = '<div class="region-composition"><div class="composition-items"><span><b>'+senateSeats+'</b> Senators</span><span><b>'+representativeSeats+'</b> Representatives</span></div></div>';
-    const repRows = Array.from({length:representativeSeats},(_,index)=>'<div class="rep-row"><span class="rep-district">SEAT '+(index+1)+'</span><strong>Regional U.S. Representative</strong><span class="rep-party">1 seat</span></div>').join('');
-    info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">REGIONAL REPRESENTATION</span><h3>'+region.name+' <span>REGION</span></h3></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div>'+composition+
-      '<div class="directory-state"><div class="directory-section-label">UNITED STATES SENATE <span>'+senateSeats+' REGIONAL SEATS</span></div><div class="senator-grid">'+senateCards+'</div><div class="directory-section-label house-label">HOUSE OF REPRESENTATIVES <span>'+representativeSeats+' REGIONAL SEATS</span></div><div class="rep-list">'+repRows+'</div></div>';
+    if (intro) intro.hidden = true;
+    info.classList.add('is-open');
+    const senateCards = region.senateClasses.map((seatClass)=>'<article class="contact-member"><div class="contact-avatar" aria-hidden="true">+</div><div class="contact-member-copy"><span class="contact-role">U.S. SENATOR · CLASS '+seatClass+'</span><strong>Seat holder not added</strong><span class="contact-meta">Party not provided</span><span class="contact-discord">Discord contact coming soon</span></div></article>').join('');
+    const repCards = Array.from({length:region.districts},(_,index)=>'<article class="contact-member"><div class="contact-avatar" aria-hidden="true">+</div><div class="contact-member-copy"><span class="contact-role">REGIONAL REPRESENTATIVE · SEAT '+(index+1)+'</span><strong>Seat holder not added</strong><span class="contact-meta">Party not provided</span><span class="contact-discord">Discord contact coming soon</span></div></article>').join('');
+    info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">CONTACT YOUR REPRESENTATIVE</span><h3>'+region.name+' <span>REGION</span></h3></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div><div class="contact-group"><div class="contact-group-title">U.S. SENATE</div><div class="contact-member-list">'+senateCards+'</div></div><div class="contact-group"><div class="contact-group-title">U.S. HOUSE</div><div class="contact-member-list">'+repCards+'</div></div>';
   };
   const setSelected = (region) => {
     selected = selected?.id === region?.id ? null : region;
