@@ -612,3 +612,6 @@ body{background:#fff;color:#080808}
 .electoral-svg .dc-map-shape{pointer-events:none}
 .electoral-svg .dc-map-shape .dc-state-shape{fill:#dcdcdc;stroke:#999;stroke-width:1;vector-effect:non-scaling-stroke}
 .electoral-svg .dc-map-shape .dc-label{font:700 11px 'Montserrat',sans-serif;fill:#ccc}
+
+/* District of Columbia map pin */
+.electoral-svg .dc-map-shape .dc-marker{fill:#dcdcdc;stroke:#292929;stroke-width:1.5;vector-effect:non-scaling-stroke}
