@@ -1119,3 +1119,9 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   .politickin-footer .republic-platform img{max-height:37px!important}
   .politickin-footer .radio-platform svg{width:22px!important;height:22px!important}
 }
+
+/* Slightly enlarge the footer radio mark. */
+.politickin-footer .radio-platform svg{width:27px!important;height:27px!important}
+@media(max-width:600px){
+  .politickin-footer .radio-platform svg{width:25px!important;height:25px!important}
+}
