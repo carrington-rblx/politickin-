@@ -162,6 +162,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         svg.setAttribute('viewBox','0 0 '+width+' '+height);
       }
       const layer=el('g',{'class':'states-layer'});
+      svg.appendChild(layer);
       const stateGroups=new Map();
       const bounds=[];
       regions.forEach(region=>{
@@ -214,26 +215,13 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         center.textContent=region.ev+' EV';
         totalNodes.set(region.id,center);
       });
-      // DC remains separate from the eight electoral regions.
-      const dcSource=parsed.getElementById('DC')||parsed.querySelector('[id="DC"]');
-      if(dcSource){
-        const dcGroup=document.createElementNS(ns,'g');
-        dcGroup.setAttribute('class','dc-map-shape');
-        dcSource.querySelectorAll('path').forEach(original=>{
-          const path=original.cloneNode(true);
-          path.setAttribute('class','dc-state-shape');
-          path.removeAttribute('style');
-          dcGroup.appendChild(path);
-        });
-        const dcText=dcSource.querySelector('text');
-        if(dcText){
-          const label=dcText.cloneNode(true);
-          label.setAttribute('class','dc-label');
-          label.removeAttribute('style');
-          dcGroup.appendChild(label);
-        }
-        layer.appendChild(dcGroup);
-      }
+      // DC is shown as a clean map pin: its geographic footprint is too
+      // small at this scale and the source file's leader-line artwork looks
+      // like a stray triangle when cropped to the state geometry.
+      const dcGroup=el('g',{'class':'dc-map-shape'},layer);
+      el('circle',{cx:'800.1',cy:'242.4',r:'4.2','class':'dc-marker'},dcGroup);
+      const dcLabel=el('text',{x:'808',y:'239','class':'dc-label'},dcGroup);
+      dcLabel.textContent='DC';
       svg.addEventListener('click',event=>{if(event.target===svg)setSelected(null);});
       loading?.classList.add('is-hidden');
     } catch(error) {
