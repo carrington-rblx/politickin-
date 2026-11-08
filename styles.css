@@ -1318,13 +1318,13 @@ body:has(.news-analysis-hero) .national-section .browse-btn{
   display:table;
   width:max-content;
   margin:0 0 9px;
-  padding:5px 8px;
+  padding:6px 9px;
   background:#dcdcdc;
   color:#050505;
-  font:800 8px/1 'Montserrat',sans-serif;
-  letter-spacing:.09em;
+  font:800 10px/1 'Montserrat',sans-serif;
+  letter-spacing:.07em;
 }
 .news-category-button{font-family:'Montserrat',sans-serif;cursor:pointer}
 @media(max-width:700px){
-  .article-category-label{font-size:7px;padding:5px 7px}
+  .article-category-label{font-size:9px;padding:6px 8px}
 }
