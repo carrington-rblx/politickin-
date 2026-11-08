@@ -146,106 +146,98 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
 
   const load = async () => {
     try {
-      const loadScript = async (sources) => {
-        if (typeof sources === 'string') sources = [sources];
-        let lastError;
-        for (const src of sources) {
-          try {
-            await new Promise((resolve,reject) => {
-              const script=document.createElement('script');
-              script.src=src;script.async=true;
-              script.onload=resolve;
-              script.onerror=()=>{script.remove();reject(new Error('Could not load '+src));};
-              document.head.appendChild(script);
-            });
-            return;
-          } catch (error) { lastError=error; }
-        }
-        throw lastError || new Error('All map library sources failed');
-      };
-      const loadJson = async (sources) => {
-        let lastError;
-        for (const src of sources) {
-          try {
-            const response=await fetch(src,{cache:'force-cache'});
-            if(!response.ok) throw new Error('Map data request failed ('+response.status+')');
-            return await response.json();
-          } catch(error) { lastError=error; }
-        }
-        throw lastError || new Error('All map data sources failed');
-      };
-      await Promise.all([
-        window.topojson ? Promise.resolve() : loadScript([
-          'https://unpkg.com/topojson-client@3/dist/topojson-client.min.js',
-          'https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'
-        ]),
-        window.d3?.geoAlbersUsa ? Promise.resolve() : loadScript([
-          'https://unpkg.com/d3-geo@3/dist/d3-geo.min.js',
-          'https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js'
-        ])
-      ]);
-      const topology=await loadJson([
-        'https://unpkg.com/us-atlas@3/states-10m.json',
-        'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json'
-      ]);
-      const topo=window.topojson;
-      const geo=window.d3;
-      const collection=topo.feature(topology,topology.objects.states);
-      const projection=geo.geoAlbersUsa().fitExtent([[22,18],[938,574]],collection);
-      const path=geo.geoPath(projection);
-      const stateGeometries=topology.objects.states.geometries;
-      const byId=new Map(stateGeometries.map(g=>[Number(g.id),g]));
-      const drawLayer=el('g',{'class':'states-layer'});
-      collection.features.filter(feature=>Number(feature.id)!==11).forEach(feature=>{
-        const abbr=fips[Number(feature.id)],region=regionByState.get(abbr);
-        if(!abbr||!region)return;
-        stateFeatures.set(abbr,feature);
-        const node=el('path',{d:path(feature),fill:'#292929','class':'state-shape','data-state':abbr,'data-region':region.id,tabindex:'0',role:'button','aria-label':abbr+', '+region.name+' region'},drawLayer);
-        node.addEventListener('click',event=>{event.stopPropagation();setSelected(region);});
-        node.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();setSelected(region);}});
-        node.addEventListener('mouseenter',()=>hoverRegion(region,true));
-        node.addEventListener('mouseleave',()=>hoverRegion(region,false));
-        stateNodes.set(abbr,node);
-      });
-      const outerBorders=topo.mesh(topology,topology.objects.states,(a,b)=>a!==b && (regionByState.get(fips[Number(a.id)])?.id !== regionByState.get(fips[Number(b.id)])?.id));
+      // The state geometry is bundled with the site. No map CDN or mapping
+      // libraries are required at runtime.
+      const response=await fetch('./us_map.svg',{cache:'force-cache'});
+      if(!response.ok) throw new Error('Bundled map file returned '+response.status);
+      const source=await response.text();
+      const parsed=new DOMParser().parseFromString(source,'image/svg+xml');
+      if(parsed.querySelector('parsererror')) throw new Error('Bundled map SVG is invalid');
+      const sourceSvg=parsed.documentElement;
+      const viewBox=sourceSvg.getAttribute('viewBox');
+      if(viewBox) svg.setAttribute('viewBox',viewBox);
+      else {
+        const width=parseFloat(sourceSvg.getAttribute('width'))||962;
+        const height=parseFloat(sourceSvg.getAttribute('height'))||583;
+        svg.setAttribute('viewBox','0 0 '+width+' '+height);
+      }
+      const layer=el('g',{'class':'states-layer'});
+      const stateGroups=new Map();
+      const bounds=[];
       regions.forEach(region=>{
-        const geometries=region.states.map(s=>byId.get(Object.keys(fips).find(k=>fips[k]===s))).filter(Boolean);
-        const merged={type:'GeometryCollection',geometries};
-        const centroid=path.centroid(merged);
-        const center=el('text',{x:centroid[0],y:centroid[1],'class':'region-total','data-region':region.id},svg);
+        const regionLayer=el('g',{'class':'region-layer','data-region':region.id});
+        const boxes=[];
+        region.states.forEach(abbr=>{
+          const sourceGroup=parsed.getElementById(abbr)||parsed.querySelector('[id="'+abbr+'"]');
+          if(!sourceGroup) return;
+          const group=document.createElementNS(ns,'g');
+          group.setAttribute('class','state-unit');
+          group.setAttribute('data-state',abbr);
+          group.setAttribute('data-region',region.id);
+          group.setAttribute('tabindex','0');
+          group.setAttribute('role','button');
+          group.setAttribute('aria-label',abbr+', '+region.name+' region');
+          sourceGroup.querySelectorAll('path').forEach(original=>{
+            const path=original.cloneNode(true);
+            path.setAttribute('class','state-shape');
+            path.removeAttribute('style');
+            path.setAttribute('fill','#292929');
+            group.appendChild(path);
+          });
+          sourceGroup.querySelectorAll('text').forEach(original=>{
+            const label=original.cloneNode(true);
+            label.setAttribute('class','state-label');
+            label.removeAttribute('style');
+            group.appendChild(label);
+            labelNodes.set(abbr,label);
+          });
+          regionLayer.appendChild(group);
+          stateGroups.set(abbr,group);
+          group.addEventListener('click',event=>{event.stopPropagation();setSelected(region);});
+          group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();setSelected(region);}});
+          group.addEventListener('mouseenter',()=>hoverRegion(region,true));
+          group.addEventListener('mouseleave',()=>hoverRegion(region,false));
+        });
+        layer.appendChild(regionLayer);
+      });
+      stateGroups.forEach((node,abbr)=>stateNodes.set(abbr,node));
+      // Region vote totals are placed at the center of the combined state bounds.
+      regions.forEach(region=>{
+        const members=region.states.map(abbr=>stateGroups.get(abbr)).filter(Boolean);
+        if(!members.length) return;
+        const rects=members.map(node=>node.getBBox());
+        const minX=Math.min(...rects.map(r=>r.x));
+        const minY=Math.min(...rects.map(r=>r.y));
+        const maxX=Math.max(...rects.map(r=>r.x+r.width));
+        const maxY=Math.max(...rects.map(r=>r.y+r.height));
+        const center=el('text',{x:(minX+maxX)/2,y:(minY+maxY)/2,'class':'region-total','data-region':region.id});
         center.textContent=region.ev+' EV';
         totalNodes.set(region.id,center);
-        const labels=el('g',{'class':'labels-layer','data-region':region.id});
-        region.states.forEach(abbr=>{
-          const feature=stateFeatures.get(abbr);if(!feature)return;
-          const [x,y]=path.centroid(feature);
-          const label=el('text',{x,y,'class':'state-label','data-state':abbr},labels);
-          label.textContent=abbr;
-          labelNodes.set(abbr,label);
-        });
-        const internal=geometries.length>1?topo.mesh(topology,{type:'GeometryCollection',geometries},(a,b)=>region.states.includes(fips[Number(a.id)])&&region.states.includes(fips[Number(b.id)])):null;
-        if(internal){
-          const edge=el('path',{d:path(internal),'class':'state-borders','data-region':region.id});
-          borderNodes.set(region.id,edge);
-        }
       });
-      // Draw the national boundary mesh above state fills and internal region boundaries.
-      const boundary=el('path',{d:path(outerBorders),'class':'state-borders national-borders'});
-      boundary.setAttribute('stroke','#777');
-      boundary.setAttribute('stroke-width','1.1');
-      // DC is intentionally a separate, labeled callout rather than a region member.
-      const dc=projection([-77.0369,38.9072]);
-      if(dc){
-        el('path',{d:'M '+(dc[0]-17)+' '+(dc[1]-15)+' L '+(dc[0]-4)+' '+(dc[1]-4),'class':'dc-leader'});
-        el('circle',{cx:dc[0],cy:dc[1],r:5,'class':'dc-dot'});
-        const label=el('text',{x:dc[0]-20,y:dc[1]-18,'text-anchor':'end','class':'dc-label'});
-        label.textContent='DC · 3 EV';
+      // DC remains separate from the eight electoral regions.
+      const dcSource=parsed.getElementById('DC')||parsed.querySelector('[id="DC"]');
+      if(dcSource){
+        const dcGroup=document.createElementNS(ns,'g');
+        dcGroup.setAttribute('class','dc-map-shape');
+        dcSource.querySelectorAll('path').forEach(original=>{
+          const path=original.cloneNode(true);
+          path.setAttribute('class','dc-state-shape');
+          path.removeAttribute('style');
+          dcGroup.appendChild(path);
+        });
+        const dcText=dcSource.querySelector('text');
+        if(dcText){
+          const label=dcText.cloneNode(true);
+          label.setAttribute('class','dc-label');
+          label.removeAttribute('style');
+          dcGroup.appendChild(label);
+        }
+        layer.appendChild(dcGroup);
       }
-      // Clicking open map space clears the current region.
       svg.addEventListener('click',event=>{if(event.target===svg)setSelected(null);});
       loading?.classList.add('is-hidden');
     } catch(error) {
-      if(loading)loading.textContent='The map could not load right now. Please refresh to try again.';
+      if(loading)loading.textContent='The map could not load. Please refresh to try again.';
       console.error('Electoral map failed to initialize:',error);
     }
   };
