@@ -908,3 +908,7 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
     scrollbar-color:#555 transparent;
   }
 }
+
+/* Slightly tighten the space above the creator feature. */
+.creator-section{padding-top:64px!important}
+@media(max-width:700px){.creator-section{padding-top:48px!important}}
