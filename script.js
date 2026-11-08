@@ -108,12 +108,28 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   const ns = 'http://www.w3.org/2000/svg';
   let selected = null, stateNodes = new Map(), labelNodes = new Map(), totalNodes = new Map(), borderNodes = new Map(), stateFeatures = new Map();
   const el = (tag,attrs={},parent=svg) => {const node=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,v));parent.appendChild(node);return node;};
+  const californiaPreview = {
+    senators: [
+      {name:'Alex Padilla',party:'Democratic',class:'Class III'},
+      {name:'Adam Schiff',party:'Democratic',class:'Class I'}
+    ],
+    representatives: [
+      ['CA-01','Doug LaMalfa','Republican'],['CA-02','Jared Huffman','Democratic'],['CA-03','Kevin Kiley','Independent'],['CA-04','Mike Thompson','Democratic'],['CA-05','Tom McClintock','Republican'],['CA-06','Ami Bera','Democratic'],['CA-07','Doris Matsui','Democratic'],['CA-08','John Garamendi','Democratic'],['CA-09','Josh Harder','Democratic'],['CA-10','Mark DeSaulnier','Democratic'],['CA-11','Nancy Pelosi','Democratic'],['CA-12','Lateefah Simon','Democratic'],['CA-13','Adam Gray','Democratic'],['CA-14','Aisha Wahab','Democratic'],['CA-15','Kevin Mullin','Democratic'],['CA-16','Sam Liccardo','Democratic'],['CA-17','Ro Khanna','Democratic'],['CA-18','Zoe Lofgren','Democratic'],['CA-19','Jimmy Panetta','Democratic'],['CA-20','Vince Fong','Republican'],['CA-21','Jim Costa','Democratic'],['CA-22','David Valadao','Republican'],['CA-23','Jay Obernolte','Republican'],['CA-24','Salud Carbajal','Democratic'],['CA-25','Raul Ruiz','Democratic'],['CA-26','Julia Brownley','Democratic'],['CA-27','George Whitesides','Democratic'],['CA-28','Judy Chu','Democratic'],['CA-29','Luz Rivas','Democratic'],['CA-30','Laura Friedman','Democratic'],['CA-31','Gilbert Cisneros','Democratic'],['CA-32','Brad Sherman','Democratic'],['CA-33','Pete Aguilar','Democratic'],['CA-34','Jimmy Gomez','Democratic'],['CA-35','Norma Torres','Democratic'],['CA-36','Ted Lieu','Democratic'],['CA-37','Sydney Kamlager-Dove','Democratic'],['CA-38','Linda Sánchez','Democratic'],['CA-39','Mark Takano','Democratic'],['CA-40','Young Kim','Republican'],['CA-41','Ken Calvert','Republican'],['CA-42','Robert Garcia','Democratic'],['CA-43','Maxine Waters','Democratic'],['CA-44','Nanette Barragán','Democratic'],['CA-45','Derek Tran','Democratic'],['CA-46','J. Luis Correa','Democratic'],['CA-47','Dave Min','Democratic'],['CA-48','Darrell Issa','Republican'],['CA-49','Mike Levin','Democratic'],['CA-50','Scott Peters','Democratic'],['CA-51','Sara Jacobs','Democratic'],['CA-52','Juan Vargas','Democratic']
+    ]
+  };
   const makeInfo = (region) => {
     if (!region) {
-      info.innerHTML='<div class="region-info-empty"><span class="region-info-mark">+</span><div><strong>EXPLORE THE REGIONS</strong><p>Select a region on the map or in the key to see its electoral vote total and representation details.</p></div></div>';
+      info.innerHTML='<div class="region-info-empty"><span class="region-info-mark">+</span><div><strong>EXPLORE THE REGIONS</strong><p>Select a region on the map or in the key to explore its senators and House delegation.</p></div></div>';
       return;
     }
-    info.innerHTML='<div class="region-info-top"><div class="region-info-title-wrap"><span class="region-info-chip" style="background:'+region.color+'"></span><strong class="region-info-title">'+region.name+' ('+region.id+')</strong></div><div class="region-info-ev">'+region.ev+' <small>EV</small></div></div><div class="region-info-details">'+region.details.map(d=>'<span><b>•</b> '+d+'</span>').join('')+'</div><p class="region-info-states">STATES: '+region.states.join(' · ')+'</p>';
+    const sample = region.id === 'PC';
+    const senators = sample ? californiaPreview.senators : [];
+    const reps = sample ? californiaPreview.representatives : [];
+    const senatorCards = senators.map(person=>'<article class="member-card"><div class="member-card-top"><span class="member-role">U.S. SENATOR · '+person.class.toUpperCase()+'</span><span class="party-dot '+(person.party==='Republican'?'party-r':person.party==='Independent'?'party-i':'party-d')+'"></span></div><strong>'+person.name+'</strong><span class="member-party">'+person.party+'</span></article>').join('');
+    const repRows = reps.map(person=>'<div class="rep-row"><span class="rep-district">'+person[0]+'</span><strong>'+person[1]+'</strong><span class="rep-party">'+person[2]+'</span></div>').join('');
+    info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">REGIONAL REPRESENTATION</span><h3>'+region.name+' <span>REGION</span></h3><p>'+region.states.length+' states · Select a state roster to explore its delegation</p></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div>'+
+      (sample ? '<div class="directory-state"><div class="directory-state-heading"><h4>CALIFORNIA <span>CA</span></h4><span>DESIGN PREVIEW</span></div><div class="directory-section-label">UNITED STATES SENATE <span>2 MEMBERS</span></div><div class="senator-grid">'+senatorCards+'</div><div class="directory-section-label house-label">HOUSE OF REPRESENTATIVES <span>52 DISTRICTS</span></div><div class="rep-list">'+repRows+'</div></div><p class="directory-preview-note">Preview roster · Current officeholders · Additional state delegations will be added after the directory layout is approved.</p>' :
+      '<div class="directory-placeholder"><strong>STATE DELEGATIONS</strong><p>'+region.states.join(' · ')+'</p><span>This is the proposed directory layout. Full senator and representative rosters for this region will be added after the design is approved.</span></div>');
   };
   const setSelected = (region) => {
     selected = selected?.id === region?.id ? null : region;
@@ -124,9 +140,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
       node.classList.toggle('is-selected-region',!!selected && own === selected);
       if (own) node.style.setProperty('--region-color',own.color);
     });
-    labelNodes.forEach((node,abbr) => node.classList.toggle('is-hidden',!!selected && regionByState.get(abbr) === selected));
     borderNodes.forEach((node,id) => node.classList.toggle('region-dissolve',!!selected && id === selected.id));
-    totalNodes.forEach((node,id) => node.classList.toggle('is-visible',!!selected && id === selected.id));
     legend.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.region === selected?.id)));
     makeInfo(selected);
   };
@@ -202,19 +216,6 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         layer.appendChild(regionLayer);
       });
       stateGroups.forEach((node,abbr)=>stateNodes.set(abbr,node));
-      // Region vote totals are placed at the center of the combined state bounds.
-      regions.forEach(region=>{
-        const members=region.states.map(abbr=>stateGroups.get(abbr)).filter(Boolean);
-        if(!members.length) return;
-        const rects=members.map(node=>node.getBBox());
-        const minX=Math.min(...rects.map(r=>r.x));
-        const minY=Math.min(...rects.map(r=>r.y));
-        const maxX=Math.max(...rects.map(r=>r.x+r.width));
-        const maxY=Math.max(...rects.map(r=>r.y+r.height));
-        const center=el('text',{x:(minX+maxX)/2,y:(minY+maxY)/2,'class':'region-total','data-region':region.id});
-        center.textContent=region.ev+' EV';
-        totalNodes.set(region.id,center);
-      });
       // DC is shown as a clean map pin: its geographic footprint is too
       // small at this scale and the source file's leader-line artwork looks
       // like a stray triangle when cropped to the state geometry.
