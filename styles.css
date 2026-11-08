@@ -1125,3 +1125,9 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 @media(max-width:600px){
   .politickin-footer .radio-platform svg{width:25px!important;height:25px!important}
 }
+
+/* Bring the footer logo a little closer to the platform buttons. */
+.politickin-footer .footer-logo{margin-bottom:48px!important}
+@media(max-width:600px){
+  .politickin-footer .footer-logo{margin-bottom:39px!important}
+}
