@@ -470,3 +470,15 @@ body{background:#fff;color:#080808}
   .site-header .nav-dropdown-menu::before,
   .site-header .nav-dropdown-menu::after{display:none}
 }
+
+
+/* Visually join the dropdown pointer directly to the News + Analysis underline. */
+.site-header .nav-dropdown-menu{
+  top:calc(100% - 2px);
+}
+.site-header .nav-dropdown-menu::before{
+  top:-10px;
+}
+.site-header .nav-dropdown-menu::after{
+  top:-8px;
+}
