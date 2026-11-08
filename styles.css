@@ -715,3 +715,23 @@ body{background:#fff;color:#080808}
 
 /* Keep the header at the top of the page without following the scroll. */
 .site-header{position:relative;top:auto}
+
+
+/* National news: date-only metadata and restrained title-link hover treatment. */
+.national-section .story-meta.national-date{
+  font-size:10px;
+  line-height:1.4;
+  font-weight:600;
+  letter-spacing:.11em;
+  color:#c5c5c5;
+  margin-bottom:2px;
+}
+.national-section .article-info h3 a{
+  display:inline;
+  transition:text-shadow .28s ease,color .28s ease;
+}
+.national-section .article-info h3 a:hover,
+.national-section .article-info h3 a:focus-visible{
+  color:#fff;
+  text-shadow:0 0 7px rgba(255,255,255,.48),0 0 17px rgba(255,255,255,.2);
+}
