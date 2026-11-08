@@ -39,6 +39,10 @@
     .portal-form label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#ccc}
     .portal-form input,.portal-form textarea{width:100%;background:#050505;color:#fff;border:1px solid #555;padding:13px;font:inherit}
     .portal-form textarea{min-height:230px;resize:vertical}
+    .portal-admin-link{display:inline-block;margin-top:14px;padding:0;background:none;border:0;color:#dcdcdc;text-decoration:underline;text-underline-offset:3px;font:500 12px 'Montserrat',sans-serif;cursor:pointer}
+    .portal-admin-link:hover{color:#fff}
+    .portal-admin-form{margin-top:24px;padding-top:22px;border-top:1px solid #393939}
+    .portal-admin-form h3{margin:0;color:#fff;font:800 19px 'Montserrat',sans-serif}
     .portal-form input:focus,.portal-form textarea:focus{outline:2px solid #dcdcdc;outline-offset:1px}
     .portal-note,.portal-status{font-size:12px;color:#aaa}
     .portal-message{min-height:20px;color:#dcdcdc;font-size:13px}
@@ -108,6 +112,15 @@
           <label id="confirm-password-label">Confirm password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="10" required /></label>
           <button class="portal-button" type="submit" id="writer-auth-submit">CREATE ACCOUNT</button>
         </form>
+        <button class="portal-admin-link" id="show-admin-signin" type="button">Sign in as an Administrator</button>
+        <form class="portal-form portal-admin-form" id="admin-portal-form" hidden>
+          <h3>Administrator sign in</h3>
+          <p class="portal-note">For authorized Politickin' editorial staff only.</p>
+          <label>Administrator email<input name="email" type="email" autocomplete="username" required /></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="portal-button" type="submit">SIGN IN TO THE BACKROOM</button>
+          <button class="portal-admin-link" id="back-to-writer-signin" type="button">Back to writer sign in</button>
+        </form>
       </div>
       <div id="writer-workspace" hidden>
         <p id="writer-welcome"></p>
@@ -134,6 +147,6 @@
 </footer>
 <div class="toast" role="status" aria-live="polite"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
-<script src="./supabase-config.js"></script><script src="./script.js"></script><script src="./writer-portal.js?v=20261108-2"></script>
+<script src="./supabase-config.js"></script><script src="./script.js"></script><script src="./writer-portal.js?v=20261108-3"></script>
 </body>
 </html>
