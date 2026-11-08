@@ -240,3 +240,7 @@ body{background:#fff;color:#080808}
 
 /* Navigation links use subtle 0.62px letter spacing. */
 .site-header .main-nav a{letter-spacing:0.62px}
+
+
+/* Action buttons: Montserrat Semibold. */
+.site-header .header-actions,.site-header .header-actions .btn,.site-header .header-actions .btn-small{font-family:'Montserrat',sans-serif;font-weight:600}
