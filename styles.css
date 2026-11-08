@@ -1230,3 +1230,8 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 .main-nav a.is-active{
   font-weight:900!important;
 }
+
+/* Selected navigation link remains visibly bold */
+.site-header .main-nav a.is-active{
+  font-weight:900!important;
+}
