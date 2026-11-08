@@ -42,22 +42,27 @@ navigation?.querySelectorAll('a').forEach((link) => {
 });
 
 const setActiveNavigationLink = () => {
+  const currentPath = window.location.pathname.replace(/\/$/, '');
   const currentHash = window.location.hash;
-  const currentPath = window.location.pathname.replace(/\\/$/, '') || '/';
   const links = [...(navigation?.querySelectorAll('.nav-link') || [])];
-  const matchingLink = (currentHash
-    ? links.find((link) => {
-        const target = new URL(link.href, window.location.href);
-        return target.pathname.replace(/\\/$/, '') === currentPath && target.hash === currentHash;
-      })
-    : null) || links.find((link) => {
-      const target = new URL(link.href, window.location.href);
-      return target.pathname.replace(/\\/$/, '') === currentPath && !target.hash && target.pathname !== new URL('./index.html', window.location.href).pathname;
+  let matchingLink = null;
+
+  if (currentHash) {
+    matchingLink = links.find((link) => {
+      const target = new URL(link.getAttribute('href'), window.location.href);
+      return target.pathname.replace(/\/$/, '') === currentPath && target.hash === currentHash;
     });
-  if (matchingLink) {
-    links.forEach((item) => item.classList.remove('is-active'));
-    matchingLink.classList.add('is-active');
   }
+
+  if (!matchingLink) {
+    matchingLink = links.find((link) => {
+      const target = new URL(link.getAttribute('href'), window.location.href);
+      return target.pathname.replace(/\/$/, '') === currentPath && !target.hash &&
+        target.pathname.split('/').pop() === 'news-analysis.html';
+    });
+  }
+
+  links.forEach((link) => link.classList.toggle('is-active', link === matchingLink));
 };
 window.addEventListener('hashchange', setActiveNavigationLink);
 setActiveNavigationLink();
