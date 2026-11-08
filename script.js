@@ -168,8 +168,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         node.addEventListener('mouseleave',()=>hoverRegion(region,false));
         stateNodes.set(abbr,node);
       });
-      const borders=topo.mesh(topology,topology.objects.states,(a,b)=>a!==b);
-      const borderPath=path(borders);
+      const outerBorders=topo.mesh(topology,topology.objects.states,(a,b)=>a!==b && (regionByState.get(fips[Number(a.id)])?.id !== regionByState.get(fips[Number(b.id)])?.id));
       regions.forEach(region=>{
         const geometries=region.states.map(s=>byId.get(Object.keys(fips).find(k=>fips[k]===s))).filter(Boolean);
         const merged={type:'GeometryCollection',geometries};
@@ -192,7 +191,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         }
       });
       // Draw the national boundary mesh above state fills and internal region boundaries.
-      const boundary=el('path',{d:borderPath,'class':'state-borders national-borders'});
+      const boundary=el('path',{d:path(outerBorders),'class':'state-borders national-borders'});
       boundary.setAttribute('stroke','#777');
       boundary.setAttribute('stroke-width','1.1');
       // DC is intentionally a separate, labeled callout rather than a region member.
