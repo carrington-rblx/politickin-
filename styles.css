@@ -130,3 +130,60 @@ body{background:#fff;color:#080808}
  .side-story h2{font-size:13px;line-height:1.08}
  .side-story .story-meta{font-size:8px}
 }
+
+
+/* Larger, more prominent story presentation */
+.hero.section-shell{width:min(1080px,calc(100% - 56px))}
+.hero-grid{grid-template-columns:minmax(0,3.15fr) minmax(0,1fr);gap:24px}
+.lead-image{aspect-ratio:1.58}
+.lead-story>.story-meta{font-size:10px}
+.lead-story h1{font-size:clamp(32px,3.2vw,40px);line-height:1.03;margin:11px 0 10px}
+.lead-deck{font-size:16px;line-height:1.55}
+.side-stories{gap:30px}
+.side-story .story-meta{font-size:10px}
+.side-story h2{font-size:19px;line-height:1.08}
+.side-deck{font-size:14px}
+.national-section.section-shell{width:min(1080px,calc(100% - 56px))}
+.national-section{padding-top:88px;padding-bottom:92px}
+.section-title{max-width:780px;margin-bottom:44px}
+.section-title h2{font-size:clamp(38px,4.5vw,54px)}
+.section-title p{font-size:16px}
+.article-row{grid-template-columns:minmax(0,1fr) 320px;gap:42px;padding:32px 0}
+.article-info .story-meta{font-size:10px}
+.article-info h3{font-size:clamp(26px,2.8vw,36px);line-height:1.08;margin:13px 0}
+.article-info p{font-size:15px;line-height:1.65;margin-bottom:16px}
+.read-more{font-size:10px}
+.article-photo{height:205px}
+.series-section .section-shell{width:min(1080px,calc(100% - 56px))}
+.series-grid{gap:22px;margin-top:40px}
+.portrait{height:360px}
+.series-name{font-size:16px}
+.series-show{font-size:11px}
+@media(max-width:850px){
+ .hero.section-shell,.national-section.section-shell,.series-section .section-shell{width:calc(100% - 40px)}
+ .hero-grid{gap:18px}
+ .lead-story h1{font-size:30px}
+ .lead-deck{font-size:14px}
+ .side-story h2{font-size:15px}
+ .article-row{grid-template-columns:minmax(0,1fr) 220px;gap:22px;padding:25px 0}
+ .article-info h3{font-size:25px}
+ .article-info p{font-size:13px}
+ .article-photo{height:160px}
+ .portrait{height:260px}
+}
+@media(max-width:560px){
+ .hero.section-shell,.national-section.section-shell,.series-section .section-shell{width:calc(100% - 32px)}
+ .hero-grid{grid-template-columns:1fr;gap:24px}
+ .lead-story h1{font-size:clamp(29px,8vw,38px)}
+ .lead-deck{font-size:15px}
+ .side-stories{grid-template-columns:1fr 1fr;gap:14px}
+ .side-story h2{font-size:14px}
+ .article-row{grid-template-columns:1fr;gap:13px;padding:22px 0}
+ .article-info h3{font-size:25px}
+ .article-info p{font-size:14px}
+ .article-photo{height:auto;aspect-ratio:1.6;grid-row:1}
+ .portrait{height:210px}
+ .series-grid{gap:22px 12px}
+ .series-name{font-size:13px}
+ .series-show{font-size:9px}
+}
