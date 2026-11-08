@@ -225,14 +225,14 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
 })();
 
 
-// Cinematic intro: the soundtrack runs under continuous back-and-forth word motion.
+// Cinematic intro: autoplay the soundtrack and let the typography build to a full-screen white rush.
 (() => {
   const screen = document.getElementById('politickin-intro');
   if (!screen) return;
   const audio = document.getElementById('politickin-intro-audio');
-  const prompt = document.getElementById('intro-sound-prompt');
-  const soundButton = document.getElementById('intro-sound-button');
   const field = screen.querySelector('.intro-word-field');
+  if (!audio || !field) return;
+
   const words = [
     'BREAKING NEWS','DEMOCRACY','THE PEOPLE','ACCOUNTABILITY','WASHINGTON',
     'ELECTIONS','THE SENATE','THE HOUSE','PUBLIC POLICY','YOUR VOICE',
@@ -247,52 +247,44 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     item.textContent = word;
     item.style.setProperty('--x', ((index*37)%112-6)+'%');
     item.style.setProperty('--y', ((index*53)%108-4)+'%');
-    item.style.setProperty('--size', (15+(index%5)*7)+'px');
-    item.style.setProperty('--duration', (2.2+(index%5)*.55)+'s');
+    item.style.setProperty('--size', (24+(index%5)*10)+'px');
+    item.style.setProperty('--duration', (2.0+(index%5)*.48)+'s');
     item.style.setProperty('--delay', (-index*.31)+'s');
     item.style.setProperty('--rotate', ((index%7)-3)*8+'deg');
-    item.style.setProperty('--opacity', (.42+(index%4)*.14).toFixed(2));
-    item.style.setProperty('--distance', (38+(index%4)*19)+'vw');
-    item.style.setProperty('--direction', index%2 ? '1' : '-1');
+    item.style.setProperty('--opacity', (.58+(index%4)*.12).toFixed(2));
+    item.style.setProperty('--from', index%2 ? '-72vw' : '72vw');
+    item.style.setProperty('--to', index%2 ? '72vw' : '-72vw');
     field.appendChild(item);
   });
 
-  const startAudio = () => {
-    if (!audio) return;
-    audio.volume = .82;
-    const attempt = audio.play();
-    if (attempt && typeof attempt.then === 'function') {
-      attempt.then(() => {
-        if (prompt) prompt.hidden = true;
-      }).catch(() => {
-        if (prompt) prompt.hidden = false;
-      });
-    }
-  };
+  const flash = document.createElement('div');
+  flash.className = 'intro-white-flash';
+  flash.setAttribute('aria-hidden','true');
+  screen.appendChild(flash);
 
+  let ending = false;
   const finishSequence = () => {
-    if (screen.classList.contains('is-ending')) return;
+    if (ending) return;
+    ending = true;
     screen.classList.add('is-ending');
-    if (prompt) prompt.hidden = true;
-    window.setTimeout(() => screen.remove(), 1250);
+    window.setTimeout(() => screen.remove(), 1900);
   };
 
-  audio?.addEventListener('ended', finishSequence, { once:true });
-  audio?.addEventListener('error', () => {
-    if (prompt) {
-      prompt.hidden = false;
-      soundButton.textContent = 'RETRY SOUND';
-    }
-  });
+  audio.volume = .9;
+  audio.preload = 'auto';
+  audio.autoplay = true;
+  audio.addEventListener('ended', finishSequence, { once:true });
+  audio.addEventListener('error', () => {
+    // If the media file cannot load, don't leave the site covered indefinitely.
+    finishSequence();
+  }, { once:true });
 
-  soundButton?.addEventListener('click', () => {
-    if (audio) {
-      audio.currentTime = 0;
-      startAudio();
-    }
-  });
-
-  // Attempt immediate playback. If the browser blocks autoplay, the intro waits
-  // for the visitor's tap and then runs for the full length of the soundtrack.
-  startAudio();
+  // Try immediately, then retry as soon as the browser reports that media is ready.
+  const requestAutoplay = () => {
+    if (ending || !audio.paused) return;
+    const playback = audio.play();
+    if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+  };
+  requestAutoplay();
+  audio.addEventListener('canplay', requestAutoplay, { once:true });
 })();
