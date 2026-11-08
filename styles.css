@@ -868,3 +868,43 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
     line-height:1.12;
   }
 }
+
+
+/* Keep the community/map section in place when a region is selected. */
+.network-section{
+  border-bottom:0!important;
+}
+.creator-section{
+  border-top:0!important;
+}
+@media(min-width:851px){
+  .network-wrap{align-items:start!important}
+  .network-copy{
+    position:relative;
+    min-height:590px;
+  }
+  .network-copy .network-intro{
+    position:absolute;
+    inset:0;
+  }
+  .network-copy .region-info{
+    position:absolute;
+    inset:0;
+    max-height:590px;
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:#555 transparent;
+  }
+}
+@media(max-width:850px){
+  .network-copy{position:relative;min-height:430px}
+  .network-copy .network-intro{position:absolute;inset:0}
+  .network-copy .region-info{
+    position:absolute;
+    inset:0;
+    max-height:430px;
+    overflow-y:auto;
+    scrollbar-width:thin;
+    scrollbar-color:#555 transparent;
+  }
+}
