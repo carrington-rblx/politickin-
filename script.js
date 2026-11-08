@@ -146,13 +146,21 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
 
   const load = async () => {
     try {
-      const [topoModule, geoModule, topology] = await Promise.all([
-        import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm'),
-        import('https://cdn.jsdelivr.net/npm/d3-geo@3/+esm'),
+      const loadScript = (src) => new Promise((resolve,reject) => {
+        const script=document.createElement('script');
+        script.src=src;script.async=true;
+        script.onload=resolve;script.onerror=()=>reject(new Error('Could not load map library: '+src));
+        document.head.appendChild(script);
+      });
+      await Promise.all([
+        window.topojson ? Promise.resolve() : loadScript('https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js'),
+        window.d3?.geoAlbersUsa ? Promise.resolve() : loadScript('https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js')
+      ]);
+      const [topology]=await Promise.all([
         fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(r=>{if(!r.ok)throw new Error('Map data unavailable');return r.json();})
       ]);
-      const topo=topoModule.default||topoModule;
-      const geo=geoModule.default||geoModule;
+      const topo=window.topojson;
+      const geo=window.d3;
       const collection=topo.feature(topology,topology.objects.states);
       const projection=geo.geoAlbersUsa().fitExtent([[22,18],[938,574]],collection);
       const path=geo.geoPath(projection);
