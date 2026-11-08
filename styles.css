@@ -676,3 +676,38 @@ body{background:#fff;color:#080808}
 .rep-row{grid-template-columns:58px minmax(0,1fr) auto}
 .rep-party{font:500 9px/1.4 'DM Sans',sans-serif;color:#929292;text-align:right}
 @media(max-width:560px){.composition-note{font-size:9px}.rep-row{grid-template-columns:48px minmax(0,1fr) auto}}
+
+
+/* Selected region opens its representative directory in the copy column. */
+.network-wrap{align-items:start}
+.network-copy{min-width:0}
+.network-intro[hidden]{display:none!important}
+.region-info{display:none;min-height:0;padding:0;border:0;background:transparent}
+.region-info.is-open{display:block;animation:regionPanelIn .28s ease both}
+@keyframes regionPanelIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.region-info .directory-heading{margin:0 0 22px;padding-bottom:17px;border-bottom:1px solid #383838}
+.region-info .directory-heading h3{margin-bottom:0}
+.contact-group{margin:0 0 22px}
+.contact-group-title{font:800 9px/1.3 'Montserrat',sans-serif;letter-spacing:.14em;color:#aaa;padding-bottom:9px;border-bottom:1px solid #383838}
+.contact-member-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.contact-member{display:flex;align-items:center;gap:11px;min-width:0;padding:12px 0;border-bottom:1px solid #303030}
+.contact-avatar{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#292929;border:1px solid #555;color:#aaa;font:400 21px 'DM Sans',sans-serif;overflow:hidden}
+.contact-member-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.contact-role{font:700 7px/1.3 'Montserrat',sans-serif;letter-spacing:.08em;color:#999}
+.contact-member-copy strong{font:700 12px/1.3 'DM Sans',sans-serif;color:#f4f4f4}
+.contact-meta,.contact-discord{font:400 10px/1.35 'DM Sans',sans-serif;color:#999;overflow-wrap:anywhere}
+.contact-discord{color:#aaa}
+@media(max-width:1050px){
+  .network-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+  .network-copy{max-width:none;margin:0}
+  .network-visual{max-width:none;margin:0;width:100%}
+  .contact-member-list{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .network-wrap{grid-template-columns:1fr;gap:28px}
+  .network-copy{max-width:650px;margin-inline:auto;width:100%}
+  .network-visual{max-width:650px;margin-inline:auto}
+  .region-info.is-open{margin-top:0}
+  .contact-member-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){.contact-member-list{grid-template-columns:1fr}.contact-member{padding:10px 0}}
