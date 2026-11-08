@@ -486,3 +486,32 @@ body{background:#fff;color:#080808}
 
 /* Restore the dropdown spacing from before the latest adjustment. */
 .site-header .nav-dropdown-menu{top:calc(100% + 8px)}
+
+
+/* Match the dropdown action's hover underline to the main navigation links. */
+.site-header .nav-dropdown-menu a{
+  position:relative;
+  text-decoration:none;
+}
+.site-header .nav-dropdown-menu a::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:22px;
+  height:1px;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .24s cubic-bezier(.2,.7,.2,1);
+}
+.site-header .nav-dropdown-menu a:hover::after,
+.site-header .nav-dropdown-menu a:focus-visible::after{
+  transform:scaleX(1);
+}
+@media(max-width:850px){
+  .site-header .nav-dropdown-menu a::after{bottom:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .site-header .nav-dropdown-menu a::after{transition:none}
+}
