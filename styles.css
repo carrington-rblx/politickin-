@@ -597,3 +597,18 @@ body{background:#fff;color:#080808}
 .region-info-states{color:#777!important}
 .map-source-note{font-size:7px;color:#696969}
 @media(max-width:560px){.electoral-svg{min-height:0}.electoral-legend{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}.electoral-legend button{padding:9px 0}.region-info{padding:12px 0}}
+
+
+/* Bundled SVG map state groups (no runtime map libraries). */
+.electoral-svg .state-unit{cursor:pointer;outline:none}
+.electoral-svg .state-unit .state-shape{fill:#292929!important;stroke:#777;stroke-width:1.15;vector-effect:non-scaling-stroke;transition:fill .25s ease,opacity .25s ease,stroke .25s ease}
+.electoral-svg .state-unit.region-hover .state-shape,
+.electoral-svg .state-unit.is-selected-region .state-shape{fill:var(--region-color,#555)!important;stroke:#eee;stroke-width:1.5}
+.electoral-svg .state-unit.is-muted{opacity:.18}
+.electoral-svg .state-unit .state-label{font:700 11px 'Montserrat',sans-serif;fill:#d7d7d7;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:#292929;stroke-width:2.5px;stroke-linejoin:round}
+.electoral-svg .state-unit .state-label.is-hidden{opacity:0}
+.electoral-svg .region-total{font:900 30px 'Montserrat',sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central;paint-order:stroke;stroke:#111;stroke-width:4px;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.85);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.electoral-svg .region-total.is-visible{opacity:1;transform:scale(1)}
+.electoral-svg .dc-map-shape{pointer-events:none}
+.electoral-svg .dc-map-shape .dc-state-shape{fill:#dcdcdc;stroke:#999;stroke-width:1;vector-effect:non-scaling-stroke}
+.electoral-svg .dc-map-shape .dc-label{font:700 11px 'Montserrat',sans-serif;fill:#ccc}
