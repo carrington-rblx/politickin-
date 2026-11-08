@@ -49,17 +49,18 @@
       <div class="section-shell network-wrap">
         <div class="network-visual">
           <div class="section-kicker"><span class="live-dot"></span> ROOTED IN YOUR COMMUNITY</div>
-          <svg class="us-map" viewBox="0 0 700 430" role="img" aria-label="Illustrated map of the United States showing Courier local newsroom locations">
-            <defs><linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#353535"/><stop offset="1" stop-color="#1d1d1d"/></linearGradient></defs>
-            <path class="map-shape" d="M58 105 L91 91 122 95 150 83 179 90 207 76 239 84 264 74 293 85 321 77 349 88 378 83 402 97 433 89 458 102 485 93 512 107 542 100 568 118 597 117 615 140 637 150 628 177 643 195 628 219 614 242 596 257 585 284 565 294 550 318 530 319 513 339 487 334 469 352 446 344 427 362 405 349 389 367 367 355 347 370 327 350 305 363 286 345 264 351 244 334 221 340 204 321 182 328 162 307 143 309 126 286 105 281 98 256 80 243 75 218 59 202 65 178 50 157 Z" />
-            <path class="state-line" d="M150 85 L160 307 M207 78 L221 339 M264 76 L264 350 M321 79 L327 350 M378 84 L389 367 M433 91 L446 344 M486 96 L487 334 M542 105 L530 319 M91 91 L105 281 M58 155 L628 177 M66 204 L614 242 M98 255 L585 284" />
-            <g class="map-pins">
-              <circle cx="185" cy="154" r="7"/><circle cx="238" cy="190" r="7"/><circle cx="315" cy="153" r="7"/><circle cx="404" cy="184" r="7"/><circle cx="484" cy="158" r="7"/><circle cx="520" cy="232" r="7"/><circle cx="345" cy="268" r="7"/>
-            </g>
-            <g class="map-labels"><text x="95" y="139">UPNORTH NEWS</text><text x="150" y="221">COURIER COLORADO</text><text x="270" y="126">THE NEVADAN</text><text x="374" y="158">GRANITE POST</text><text x="496" y="137">THE KEYSTONE</text><text x="536" y="250">DOGWOOD</text><text x="292" y="297">LOCAL VOICES</text></g>
-            <g class="map-lines"><path d="M185 154 L126 142"/><path d="M238 190 L212 211"/><path d="M315 153 L317 130"/><path d="M404 184 L420 162"/><path d="M484 158 L505 143"/><path d="M520 232 L543 244"/><path d="M345 268 L335 289"/></g>
-          </svg>
-          <div class="map-caption"><span class="map-legend"></span> LOCAL NEWSROOMS, NATIONAL IMPACT</div>
+          <div class="electoral-map" id="electoral-map">
+            <div class="electoral-map-heading"><span>THE UNITED STATES</span><span class="map-hint">SELECT A REGION</span></div>
+            <div class="electoral-map-stage">
+              <svg class="electoral-svg" id="electoral-svg" viewBox="0 0 960 610" role="img" aria-label="Interactive map of the United States divided into eight custom electoral regions and the District of Columbia"></svg>
+              <div class="map-loading" id="map-loading">Loading the electoral map…</div>
+            </div>
+            <div class="electoral-legend" id="electoral-legend" aria-label="Electoral regions"></div>
+            <section class="region-info" id="region-info" aria-live="polite">
+              <div class="region-info-empty"><span class="region-info-mark">+</span><div><strong>EXPLORE THE REGIONS</strong><p>Select a region on the map or in the key to see its electoral vote total and representation details.</p></div></div>
+            </section>
+            <div class="map-source-note">REGIONAL ELECTORAL VOTE ALLOCATIONS · DISTRICT OF COLUMBIA SHOWN SEPARATELY</div>
+          </div>
         </div>
         <div class="network-copy">
           <div class="eyebrow">THE COURIER NETWORK</div>
