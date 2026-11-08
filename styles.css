@@ -1062,3 +1062,17 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 /* Slightly increase Follow button label size. */
 .follow-button{font-size:12px}
 @media(max-width:600px){.follow-button{font-size:11px}}
+
+
+/* Footer platform buttons: Republic logo and Radio only. */
+.politickin-footer .footer-platforms{gap:14px}
+.politickin-footer .footer-platform{
+  display:flex;align-items:center;justify-content:center;
+  width:132px;height:44px;padding:8px 17px;
+  border-radius:999px;background:#1d1d1d;color:#fff;
+  transition:transform .22s ease,background .22s ease;
+}
+.politickin-footer .footer-platform:hover{transform:translateY(-3px);background:#383838}
+.politickin-footer .republic-platform img{display:block;width:100%;height:100%;max-height:27px;object-fit:contain}
+.politickin-footer .radio-platform{font:700 13px/1 'Montserrat',sans-serif;letter-spacing:.12em}
+@media(max-width:600px){.politickin-footer .footer-platform{width:116px;height:40px}}
