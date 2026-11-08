@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Create a Politickin' writer account, sign in, and track your op-ed submissions." />
+  <title>Writer Portal | Politickin'</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    html,body{min-height:100%;background:#000!important}
+    body.submit-op-ed-page{background:#000!important;color:#fff}
+    .submit-op-ed-page .site-header,.submit-op-ed-page .site-footer{background:#000!important}
+    .portal-main{min-height:calc(100vh - 170px);padding:clamp(55px,8vw,100px) 22px 90px;background:#000;color:#fff}
+    .portal-wrap{width:min(760px,100%);margin:0 auto}
+    .portal-eyebrow{font:800 10px Montserrat,sans-serif;letter-spacing:.18em;color:#aaa}
+    .portal-wrap h1{font:900 clamp(38px,7vw,66px)/1 Montserrat,sans-serif;letter-spacing:-.06em;margin:12px 0 16px}
+    .portal-rule{height:6px;width:110px;background:#dcdcdc;margin:24px 0 30px}
+    .portal-panel{display:block;padding:clamp(20px,4vw,34px);background:#111;border:1px solid #393939}
+    .portal-panel h2{font:800 23px Montserrat,sans-serif;margin:0 0 12px}
+    .portal-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+    .portal-tabs button{background:transparent;color:#ddd;border:1px solid #555;padding:10px 15px;cursor:pointer;font:700 11px Montserrat,sans-serif}
+    .portal-tabs button[aria-pressed="true"]{background:#dcdcdc;color:#000;border-color:#dcdcdc}
+    .portal-form{display:grid;gap:14px;max-width:100%}
+    .portal-panel [hidden],.portal-panel form[hidden],.portal-panel label[hidden]{display:none!important}
+    .portal-form label{display:grid;gap:7px;font:700 11px Montserrat,sans-serif;color:#ccc}
+    .portal-form input,.portal-form textarea{width:100%;background:#050505;color:#fff;border:1px solid #555;padding:14px;font:14px Montserrat,sans-serif}
+    .portal-form textarea{min-height:230px;resize:vertical}
+    .portal-form input:focus,.portal-form textarea:focus{outline:2px solid #dcdcdc;outline-offset:1px}
+    .portal-button{background:#dcdcdc;color:#050505;border:0;padding:15px 24px;font:900 11px Montserrat,sans-serif;letter-spacing:.08em;cursor:pointer}
+    .portal-button:hover{background:#fff}
+    .portal-admin-link{display:inline-block;margin-top:17px;padding:0;background:none;border:0;color:#dcdcdc;text-decoration:underline;text-underline-offset:3px;font:500 11px Montserrat,sans-serif;cursor:pointer}
+    .portal-admin-link:hover{color:#fff}
+    .portal-admin-form{margin-top:24px;padding-top:22px;border-top:1px solid #393939}
+    .portal-admin-form h3,.portal-panel h3{margin:0;color:#fff;font:800 18px Montserrat,sans-serif}
+    .portal-note,.portal-status{font:12px/1.7 Montserrat,sans-serif;color:#aaa}
+    .portal-message{min-height:20px;color:#dcdcdc;font:12px Montserrat,sans-serif}
+    .submission-list{display:grid;gap:12px;margin:20px 0}
+    .submission-card{padding:16px;border:1px solid #444;background:#090909}
+    .submission-card h3{margin:0 0 8px}
+    .status-pill{display:inline-block;padding:4px 9px;background:#333;color:#fff;font-size:10px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .status-pill.accepted{background:#214d35}.status-pill.declined{background:#592a2a}.status-pill.under-review{background:#55471f}
+    @media(max-width:650px){.portal-main{padding-top:48px}.portal-tabs button{flex:1}}
+  </style>
+</head>
+<body class="submit-op-ed-page">
+<header class="site-header">
+  <a class="wordmark" href="./index.html" aria-label="Politickin home"><img class="header-logo" src="./Politickin%27%20WHITE.png?v=a7400ff31639ab656cc63ef716fd7ea4c608092f" alt="Politickin’" /></a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="main-nav" aria-label="Main navigation">
+    <div class="nav-dropdown"><a class="nav-link" href="./news-analysis.html" aria-haspopup="true" aria-expanded="false">News + Analysis</a><div class="nav-dropdown-menu"><a href="./submit-op-ed.html">Submit an Op-Ed</a></div></div>
+    <a class="nav-link" href="./index.html#series">Podcast</a><a class="nav-link" href="./index.html#about">The Peoples House</a><a class="nav-link" href="./news-analysis.html#national">Polls</a><a class="nav-link" href="./index.html#about">About</a>
+  </nav>
+  <div class="header-actions"><a class="btn btn-light btn-small" href="./index.html#support">DONATE</a><a class="btn btn-outline btn-small" href="./writer-portal.html">SIGN UP</a></div>
+</header>
+<main class="portal-main">
+  <div class="portal-wrap">
+    <div class="portal-eyebrow">YOUR POLITICKIN' ACCOUNT</div>
+    <h1>Writer Portal</h1>
+    <div class="portal-rule" aria-hidden="true"></div>
+    <section class="portal-panel is-open" id="writer-portal" aria-labelledby="writer-portal-title">
+      <h2 id="writer-portal-title">Sign up or sign in</h2>
+      <p class="portal-note">Create an account with your Roblox username and a new Politickin' password. This is not your Roblox password. We do not ask for your Roblox password, email address, or phone number. Sign in any time to check whether your op-ed has been received, is under review, or has been decided.</p>
+      <div id="writer-auth-area">
+        <div class="portal-tabs"><button type="button" data-auth-mode="signup" aria-pressed="true">Create account</button><button type="button" data-auth-mode="login" aria-pressed="false">Sign in</button></div>
+        <form class="portal-form" id="writer-auth-form">
+          <label>Roblox username<input name="username" autocomplete="username" minlength="3" maxlength="20" required /></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" minlength="10" required /></label>
+          <label id="confirm-password-label">Confirm password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="10" required /></label>
+          <button class="portal-button" type="submit" id="writer-auth-submit">CREATE ACCOUNT</button>
+        </form>
+        <button class="portal-admin-link" id="show-admin-signin" type="button">Sign in as an Administrator</button>
+        <form class="portal-form portal-admin-form" id="admin-portal-form" hidden>
+          <h3>Administrator sign in</h3>
+          <p class="portal-note">For authorized Politickin' editorial staff only.</p>
+          <label>Administrator email<input name="email" type="email" autocomplete="username" required /></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button class="portal-button" type="submit">SIGN IN TO THE BACKROOM</button>
+          <button class="portal-admin-link" id="back-to-writer-signin" type="button">Back to writer sign in</button>
+        </form>
+      </div>
+      <div id="writer-workspace" hidden>
+        <p id="writer-welcome"></p>
+        <h3>Submit a new op-ed</h3>
+        <form class="portal-form" id="op-ed-submission-form">
+          <label>Headline<input name="title" maxlength="180" required /></label>
+          <label>Short summary<input name="summary" maxlength="300" required /></label>
+          <label>Your op-ed<textarea name="body" minlength="200" required></textarea></label>
+          <button class="portal-button" type="submit">SEND FOR REVIEW</button>
+        </form>
+        <h3 style="margin-top:30px">Your submissions</h3><div class="submission-list" id="writer-submissions"></div>
+        <button class="portal-button" id="writer-signout" type="button">SIGN OUT</button>
+      </div>
+      <p class="portal-message" id="writer-portal-message" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+</main>
+<footer class="site-footer politickin-footer" id="support">
+  <div class="footer-centered"><a class="footer-logo" href="./index.html" aria-label="Politickin' home"><img src="./Politickin%27%20WHITE.png" alt="Politickin'"/></a>
+    <div class="footer-socials footer-platforms" aria-label="Politickin' platforms"><a class="footer-platform republic-platform" href="./index.html#newsletter" aria-label="Republic"><img src="./REPUBLIC%20LOGO.png" alt="Republic"/></a><a class="footer-platform radio-platform" href="./index.html#newsletter" aria-label="Radio"><svg viewBox="0 0 32 32" role="img" aria-hidden="true"><path d="M5 12.5h22a2.5 2.5 0 0 1 2.5 2.5v11A2.5 2.5 0 0 1 27 28.5H5A2.5 2.5 0 0 1 2.5 26V15A2.5 2.5 0 0 1 5 12.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 15-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="20.5" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M21 18h4M21 22h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+    <nav class="footer-quicklinks" aria-label="Footer navigation"><a href="./index.html#support">Privacy</a><a href="./index.html#about">About</a><a href="./index.html#support">Careers</a><a href="./submit-op-ed.html">Submit</a><a href="./index.html#support">Contact</a></nav><div class="footer-legal"><p>© 2026 POLITICKIN'. All rights reserved.</p></div>
+  </div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+<script src="./supabase-config.js"></script><script src="./script.js"></script><script src="./writer-portal.js?v=20261108-5"></script>
+</body>
+</html>
