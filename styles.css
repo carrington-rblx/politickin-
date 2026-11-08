@@ -232,3 +232,7 @@ body{background:#fff;color:#080808}
 
 /* Navigation links: Montserrat Regular. */
 .site-header .main-nav a{font-family:'Montserrat',sans-serif;font-weight:400}
+
+
+/* Navigation tracking: 62% of the current font size (0.62em in CSS). */
+.site-header .main-nav a{letter-spacing:0.62em}
