@@ -711,3 +711,7 @@ body{background:#fff;color:#080808}
   .contact-member-list{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:480px){.contact-member-list{grid-template-columns:1fr}.contact-member{padding:10px 0}}
+
+
+/* Keep the header at the top of the page without following the scroll. */
+.site-header{position:relative;top:auto}
