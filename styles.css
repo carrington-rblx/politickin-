@@ -1110,3 +1110,12 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
   .politickin-footer .radio-platform{padding:7px 14px!important}
   .politickin-footer .radio-platform svg{width:19px!important;height:19px!important}
 }
+
+
+/* Final footer mark balance: slightly enlarge Republic and match radio icon sizing. */
+.politickin-footer .republic-platform img{max-height:41px!important}
+.politickin-footer .radio-platform svg{width:24px!important;height:24px!important}
+@media(max-width:600px){
+  .politickin-footer .republic-platform img{max-height:37px!important}
+  .politickin-footer .radio-platform svg{width:22px!important;height:22px!important}
+}
