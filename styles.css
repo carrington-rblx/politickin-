@@ -244,3 +244,9 @@ body{background:#fff;color:#080808}
 
 /* Action buttons: Montserrat Semibold. */
 .site-header .header-actions,.site-header .header-actions .btn,.site-header .header-actions .btn-small{font-family:'Montserrat',sans-serif;font-weight:600}
+
+
+/* Use the supplied Politickin' white logo in the header. */
+.site-header .wordmark{display:flex;align-items:center;flex:0 0 auto}
+.site-header .header-logo{display:block;width:clamp(112px,11vw,150px);height:auto;max-height:42px;object-fit:contain}
+@media(max-width:560px){.site-header .header-logo{width:112px;max-height:34px}}
