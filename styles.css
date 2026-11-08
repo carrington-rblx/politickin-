@@ -436,3 +436,37 @@ body{background:#fff;color:#080808}
   }
   .site-header .nav-dropdown-menu a{font-size:14px}
 }
+
+
+/* Rebuild the dropdown pointer as a clean, joined outlined triangle. */
+.site-header .nav-dropdown-menu::before{
+  content:"";
+  position:absolute;
+  top:-10px;
+  left:50%;
+  width:0;
+  height:0;
+  background:transparent;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-bottom:10px solid #fff;
+  transform:translateX(-50%);
+}
+.site-header .nav-dropdown-menu::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  top:-8px;
+  left:50%;
+  width:0;
+  height:0;
+  background:transparent;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-bottom:9px solid #000;
+  transform:translateX(-50%);
+}
+@media(max-width:850px){
+  .site-header .nav-dropdown-menu::before,
+  .site-header .nav-dropdown-menu::after{display:none}
+}
