@@ -120,7 +120,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     stateNodes.forEach((node,abbr) => {
       const own = regionByState.get(abbr);
       node.classList.toggle('is-muted',!!selected && own !== selected);
-      node.classList.toggle('region-hover',!!selected && own === selected);
+      node.classList.toggle('region-hover',!!selected && own === selected);\n      node.classList.toggle('is-selected-region',!!selected && own === selected);\n      if (own) node.style.setProperty('--region-color',own.color);
     });
     labelNodes.forEach((node,abbr) => node.classList.toggle('is-hidden',!!selected && regionByState.get(abbr) === selected));
     borderNodes.forEach((node,id) => node.classList.toggle('region-dissolve',!!selected && id === selected.id));
@@ -130,7 +130,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   };
   const hoverRegion = (region,on) => {
     if (selected) return;
-    stateNodes.forEach((node,abbr) => node.classList.toggle('region-hover',on && regionByState.get(abbr) === region));
+    stateNodes.forEach((node,abbr) => {const active=on && regionByState.get(abbr) === region;node.classList.toggle('region-hover',active);node.style.setProperty('--region-color',region.color);});
   };
   regions.forEach(region => {
     const button=document.createElement('button');
@@ -161,7 +161,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
         const abbr=fips[Number(feature.id)],region=regionByState.get(abbr);
         if(!abbr||!region)return;
         stateFeatures.set(abbr,feature);
-        const node=el('path',{d:path(feature),fill:region.color,'class':'state-shape','data-state':abbr,'data-region':region.id,tabindex:'0',role:'button','aria-label':abbr+', '+region.name+' region'},drawLayer);
+        const node=el('path',{d:path(feature),fill:'#292929','class':'state-shape','data-state':abbr,'data-region':region.id,tabindex:'0',role:'button','aria-label':abbr+', '+region.name+' region'},drawLayer);
         node.addEventListener('click',event=>{event.stopPropagation();setSelected(region);});
         node.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();setSelected(region);}});
         node.addEventListener('mouseenter',()=>hoverRegion(region,true));
