@@ -669,3 +669,10 @@ body{background:#fff;color:#080808}
 .composition-items span{font:500 10px/1.5 'DM Sans',sans-serif;color:#aaa}
 .composition-items b{color:#fff;font-weight:700}
 @media(max-width:560px){.composition-items{gap:7px 12px}.composition-items span{font-size:9px}}
+
+
+/* Make the regional seat totals explicit and distinguish them from state delegations. */
+.composition-note{margin:9px 0 0;color:#929292;font:400 10px/1.55 'DM Sans',sans-serif}
+.rep-row{grid-template-columns:58px minmax(0,1fr) auto}
+.rep-party{font:500 9px/1.4 'DM Sans',sans-serif;color:#929292;text-align:right}
+@media(max-width:560px){.composition-note{font-size:9px}.rep-row{grid-template-columns:48px minmax(0,1fr) auto}}
