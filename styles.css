@@ -661,3 +661,11 @@ body{background:#fff;color:#080808}
  .rep-list{grid-template-columns:1fr}
  .rep-row{grid-template-columns:50px minmax(0,1fr)}
 }
+
+
+/* Explicit region composition summary. */
+.region-composition{margin:0 0 17px;padding:12px 0;border-top:1px solid #303030;border-bottom:1px solid #303030}
+.composition-items{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:9px}
+.composition-items span{font:500 10px/1.5 'DM Sans',sans-serif;color:#aaa}
+.composition-items b{color:#fff;font-weight:700}
+@media(max-width:560px){.composition-items{gap:7px 12px}.composition-items span{font-size:9px}}
