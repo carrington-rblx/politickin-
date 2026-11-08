@@ -1,3 +1,1 @@
-/* Public client configuration. Fill these values after the Supabase project is connected. Never put a service-role key here. */
-window.POLITICKIN_SUPABASE_URL = window.POLITICKIN_SUPABASE_URL || "";
-window.POLITICKIN_SUPABASE_ANON_KEY = window.POLITICKIN_SUPABASE_ANON_KEY || "";
+window.POLITICKIN_SUPABASE={url:"https://likdiwqwjuqtbagafani.supabase.co",publishableKey:"sb_publishable_n-VFE9mpJNpdwMskyThKYw_q1G98w7m"};window.POLITICKIN_PORTAL_ENDPOINT="https://likdiwqwjuqtbagafani.supabase.co/functions/v1/politickin-portal";
