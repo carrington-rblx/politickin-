@@ -236,3 +236,24 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   };
   load();
 })();
+
+
+/* Filter News + Analysis cards in place; All restores every category. */
+(() => {
+  const categoryNav = document.querySelector('.news-category-nav');
+  const articleCards = [...document.querySelectorAll('.news-article-card[data-category]')];
+  if (!categoryNav || !articleCards.length) return;
+  categoryNav.querySelectorAll('[data-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      categoryNav.querySelectorAll('[data-filter]').forEach((item) => {
+        const active = item === button;
+        item.classList.toggle('is-current', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      articleCards.forEach((card) => {
+        card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      });
+    });
+  });
+})();
