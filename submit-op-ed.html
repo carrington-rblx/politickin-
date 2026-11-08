@@ -52,7 +52,7 @@
     @media(max-width:650px){.submit-op-ed-hero{padding:54px 22px 36px}.submit-op-ed-hero-inner,.op-ed-content{width:calc(100% - 36px)}.submit-op-ed-hero h1{font-size:clamp(38px,10vw,54px)}.op-ed-lists{grid-template-columns:1fr;gap:0}.portal-panel{padding:18px}.op-ed-content{font-size:14px}}
   
     .past-opeds-section{display:block;width:100%;background:#fff!important;color:#111;padding:54px 0 72px;margin-top:52px}
-    .past-opeds-inner{width:min(1240px,calc(100% - 80px));margin:0 auto}
+    .past-opeds-inner{width:min(1240px,calc(100% - 80px));margin:0 auto}.past-opeds-title-row{display:flex;align-items:center;justify-content:space-between;gap:18px}.past-opeds-see-all{display:inline-flex;align-items:center;justify-content:center;background:#111;color:#fff;text-decoration:none;border:1px solid #111;padding:12px 20px;font:800 10px/1 Montserrat,sans-serif;letter-spacing:.12em;white-space:nowrap;cursor:pointer}.past-opeds-see-all:hover{background:#444;border-color:#444}
     .past-opeds-heading{font:800 clamp(17px,2vw,22px)/1.15 'Montserrat',sans-serif;letter-spacing:-.035em;text-align:left;margin:0 0 24px;color:#111}
     .past-opeds-area{min-height:180px;background:#fff;color:#111;padding:0;border-radius:0}
     .past-opeds-list{display:grid;grid-template-columns:1fr;gap:0}
@@ -69,7 +69,7 @@
     .past-op-ed-full img{max-width:100%;height:auto;max-height:520px;object-fit:contain}
     .past-op-ed-full figcaption{font:12px/1.4 Arial,sans-serif;color:#777}
     .past-opeds-empty{color:#777}
-    @media(max-width:650px){.past-opeds-inner{width:calc(100% - 36px)}.past-op-ed-card{grid-template-columns:1fr;gap:14px}.past-op-ed-image{height:190px}.past-opeds-section{padding:40px 0 52px}}
+    @media(max-width:650px){.past-opeds-inner{width:calc(100% - 36px)}.past-op-ed-card{grid-template-columns:1fr;gap:14px}.past-op-ed-image{height:190px} .past-opeds-section{padding:40px 0 52px}.past-opeds-title-row{align-items:flex-start}.past-opeds-see-all{padding:11px 14px}}
 
   </style>
 </head>
@@ -124,7 +124,7 @@
       <p class="portal-message" id="writer-portal-message" role="status" aria-live="polite"></p>
     </section>
   </section>
-  <section class="past-opeds-section" aria-labelledby="past-opeds-title"><div class="past-opeds-inner"><h2 class="past-opeds-heading" id="past-opeds-title">View past op-eds below:</h2><div class="past-opeds-area" id="published-opeds"><p class="past-opeds-empty">Published op-eds will appear here.</p></div></div></section>
+  <section class="past-opeds-section" aria-labelledby="past-opeds-title"><div class="past-opeds-inner"><div class="past-opeds-title-row"><h2 class="past-opeds-heading" id="past-opeds-title">View past op-eds below:</h2><button class="past-opeds-see-all" id="past-opeds-see-all" type="button" hidden>SEE ALL →</button></div><div class="past-opeds-area" id="published-opeds"><p class="past-opeds-empty">Published op-eds will appear here.</p></div></div></section>
 </main>
 <footer class="site-footer politickin-footer" id="support">
   <div class="footer-centered"><a class="footer-logo" href="./index.html" aria-label="Politickin' home"><img src="./Politickin%27%20WHITE.png" alt="Politickin'"/></a>
