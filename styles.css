@@ -1080,3 +1080,10 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 
 /* Round the Browse All News + Analysis button and keep its label arrow-free. */
 .national-section .browse-btn{border-radius:999px!important;}
+
+
+/* Give the Republic mark more room and use a clear radio receiver icon. */
+.politickin-footer .republic-platform img{max-height:34px!important;}
+.politickin-footer .radio-platform{font-size:0!important;letter-spacing:0!important;}
+.politickin-footer .radio-platform svg{display:block;width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:600px){.politickin-footer .republic-platform img{max-height:32px!important;}.politickin-footer .radio-platform svg{width:24px;height:24px;}}
