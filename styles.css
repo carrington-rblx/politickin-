@@ -209,3 +209,7 @@ body{background:#fff;color:#080808}
 .site-header .header-actions{margin-left:0;gap:12px}
 @media(max-width:850px){.site-header{justify-content:space-between;gap:14px;padding-inline:25px}.site-header .main-nav{margin:0}}
 @media(max-width:560px){.site-header{padding-inline:18px}}
+
+
+/* Header typography: Montserrat Medium throughout. */
+.site-header,.site-header .wordmark,.site-header .main-nav a,.site-header .header-actions,.site-header .btn,.site-header .btn-small{font-family:'Montserrat',sans-serif;font-weight:500}
