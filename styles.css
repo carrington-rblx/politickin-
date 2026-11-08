@@ -563,3 +563,37 @@ body{background:#fff;color:#080808}
 @media(max-width:1050px){.network-wrap{grid-template-columns:1fr;gap:42px}.network-visual{max-width:780px;margin-inline:auto;width:100%}.network-copy{max-width:650px;margin-inline:auto}}
 @media(max-width:560px){.electoral-map-heading{font-size:8px}.electoral-svg{min-height:190px}.electoral-legend{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.electoral-legend button{padding:9px 8px}.legend-name{font-size:9px}.region-info{padding:12px}.region-info-ev{font-size:21px}.region-info-details{gap:7px 12px}}
 @media(prefers-reduced-motion:reduce){.electoral-svg *,.electoral-legend button{transition:none!important}}
+
+
+/* Editorial map refinement: open canvas, quiet state fills, restrained regional accents. */
+.electoral-map{color:#f4f4f4}
+.electoral-map-stage{background:transparent;border:0;overflow:visible}
+.electoral-svg{min-height:0}
+.electoral-svg .state-shape{fill:#292929!important;stroke:#777;stroke-width:1.05}
+.electoral-svg .state-shape:hover,.electoral-svg .state-shape.region-hover{fill:var(--region-color,#555)!important;filter:brightness(1.12);stroke:#f2f2f2;stroke-width:1.45}
+.electoral-svg .state-shape.is-muted{opacity:.16}
+.electoral-svg .state-shape.is-selected-region{fill:var(--region-color)!important;opacity:1}
+.electoral-svg .state-borders{stroke:#777;stroke-width:.8}
+.electoral-svg .state-label{fill:#d7d7d7;font-size:10px;stroke:#292929;stroke-width:2.5px}
+.electoral-svg .region-total{fill:#fff;stroke:#111;stroke-width:4px;font-size:32px}
+.electoral-svg .dc-dot{fill:var(--accent);stroke:#111}
+.electoral-svg .dc-leader{stroke:#aaa}
+.electoral-svg .dc-label{fill:#cfcfcf;font-size:9px}
+.map-loading{background:transparent;color:#999}
+.electoral-legend{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px 15px;margin:10px 0 18px}
+.electoral-legend button{padding:8px 2px;background:transparent;border:0;border-bottom:1px solid #333;color:#ccc;gap:8px}
+.electoral-legend button:hover,.electoral-legend button[aria-pressed="true"]{background:transparent;border-color:#eee}
+.electoral-legend button[aria-pressed="true"] .legend-name{color:#fff}
+.legend-swatch{width:7px;height:7px;flex-basis:7px}
+.legend-name{font-size:9px;letter-spacing:.025em}
+.legend-ev{color:#888;font-size:8px}
+.region-info{min-height:82px;border:0;border-top:1px solid #383838;border-bottom:1px solid #383838;background:transparent;padding:13px 0}
+.region-info-empty{min-height:56px}
+.region-info-mark{width:27px;height:27px;border:1px solid #555;font-size:16px}
+.region-info strong,.region-info-title{font-size:9px;letter-spacing:.14em}
+.region-info p{font-size:11px;color:#999}
+.region-info-ev{font-size:23px}
+.region-info-details span{font-size:10px;color:#aaa}
+.region-info-states{color:#777!important}
+.map-source-note{font-size:7px;color:#696969}
+@media(max-width:560px){.electoral-svg{min-height:0}.electoral-legend{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 14px}.electoral-legend button{padding:9px 0}.region-info{padding:12px 0}}
