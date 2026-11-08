@@ -1225,3 +1225,8 @@ html,body,body *{font-family:'Montserrat',sans-serif!important}
 .main-nav a:focus-visible{
   font-weight:900!important;
 }
+
+/* Keep the selected navigation item bold after it has been clicked */
+.main-nav a.is-active{
+  font-weight:900!important;
+}
