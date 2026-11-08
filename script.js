@@ -223,3 +223,63 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   };
   load();
 })();
+
+
+// Full-screen branded intro: flying newsroom words, a forward-rushing wordmark, and soundtrack.
+(() => {
+  const screen = document.getElementById('politickin-intro');
+  if (!screen) return;
+  const audio = document.getElementById('politickin-intro-audio');
+  const prompt = document.getElementById('intro-sound-prompt');
+  const soundButton = document.getElementById('intro-sound-button');
+  const field = screen.querySelector('.intro-word-field');
+  const words = [
+    'BREAKING NEWS','DEMOCRACY','THE PEOPLE','ACCOUNTABILITY','WASHINGTON',
+    'ELECTIONS','THE SENATE','THE HOUSE','PUBLIC POLICY','YOUR VOICE',
+    'THE TRUTH','POWER','FREEDOM','THE PEOPLE DESERVE TO KNOW','POLITICS',
+    'INDEPENDENT NEWS','THE VOTE','CIVIC POWER','THE BIG PICTURE','LIVE'
+  ];
+  words.forEach((word,index) => {
+    const item = document.createElement('span');
+    item.className = 'intro-flying-word';
+    item.textContent = word;
+    item.style.setProperty('--x', ((index*37)%112-6)+'%');
+    item.style.setProperty('--y', ((index*53)%108-4)+'%');
+    item.style.setProperty('--size', (15+(index%5)*7)+'px');
+    item.style.setProperty('--duration', (1.5+(index%4)*.34)+'s');
+    item.style.setProperty('--delay', (index*.105)+'s');
+    item.style.setProperty('--rotate', ((index%7)-3)*8+'deg');
+    item.style.setProperty('--opacity', (.38+(index%4)*.13).toFixed(2));
+    field.appendChild(item);
+  });
+  const flash = document.createElement('div');
+  flash.className = 'intro-white-flash';
+  screen.appendChild(flash);
+
+  const startAudio = () => {
+    if (!audio) return;
+    audio.volume = .82;
+    const attempt = audio.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(() => { if (prompt) prompt.hidden = false; });
+    }
+  };
+  startAudio();
+  soundButton?.addEventListener('click', () => {
+    startAudio();
+    if (prompt) prompt.hidden = true;
+  });
+
+  const finish = () => {
+    screen.classList.add('is-leaving');
+    window.setTimeout(() => {
+      screen.remove();
+      if (audio && !audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }, 760);
+  };
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.setTimeout(finish, reduced ? 1300 : 4650);
+})();
