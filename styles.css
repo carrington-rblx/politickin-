@@ -732,8 +732,8 @@ body{background:#fff;color:#080808}
 }
 .national-section .article-info h3 a:hover,
 .national-section .article-info h3 a:focus-visible{
-  color:#fff;
-  text-shadow:0 0 7px rgba(255,255,255,.48),0 0 17px rgba(255,255,255,.2);
+  color:inherit;
+  text-shadow:0 0 7px rgba(0,0,0,.16),0 0 16px rgba(0,0,0,.08);
 }
 
 
