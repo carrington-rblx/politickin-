@@ -144,7 +144,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     'AP-02': {name:'Otushy117',party:'Heritage Party',userId:376958694}
   };
   const avatarMarkup = (person) => {
-    if (person?.userId) return '<img src="https://www.roblox.com/headshot-thumbnail/image?userId='+person.userId+'&width=150&height=150&format=png" alt="" loading="lazy" referrerpolicy="no-referrer" />';
+    if (person?.userId) return '<img src="https://likdiwqwjuqtbagafani.supabase.co/functions/v1/roblox-avatar?userId='+person.userId+'" alt="'+(person.name || 'Roblox avatar')+' avatar" loading="lazy" referrerpolicy="no-referrer" />';
     const initials = (person?.name || '+').slice(0,1).toUpperCase();
     return '<span aria-hidden="true">'+initials+'</span>';
   };
