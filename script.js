@@ -109,7 +109,7 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   const regions = [
     {id:'PC',name:'Pacific',ev:81,color:'#2bb673',states:['WA','OR','CA','AK','HI'],senateClasses:[1,2],districts:3},
     {id:'MW',name:'Mountain West',ev:49,color:'#d99b66',states:['NV','ID','MT','WY','UT','CO','AZ','NM'],senateClasses:[2],districts:1},
-    {id:'PL',name:'Great Plains',ev:43,color:'#a55ea4',states:['ND','SD','NE','KS','OK','MN','IA','MO'],senateClasses:[1],districts:1},
+    {id:'PL',name:'Great Plains',ev:43,color:'#a55ea4',states:['ND','SD','NE','KS','OK','MN','IA','MO'],senateClasses:[1],districts:3},
     {id:'GF',name:'Gulf',ev:76,color:'#95c179',states:['TX','AR','LA','MS','AL'],senateClasses:[1],districts:2},
     {id:'GL',name:'Great Lakes',ev:68,color:'#2c5da9',states:['WI','IL','MI','IN','OH'],senateClasses:[2],districts:2},
     {id:'AP',name:'Appalachia',ev:68,color:'#598bbd',states:['KY','TN','WV','VA','PA'],senateClasses:[1],districts:2},
@@ -121,6 +121,34 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
   const ns = 'http://www.w3.org/2000/svg';
   let selected = null, stateNodes = new Map(), labelNodes = new Map(), totalNodes = new Map(), borderNodes = new Map(), stateFeatures = new Map();
   const el = (tag,attrs={},parent=svg) => {const node=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,v));parent.appendChild(node);return node;};
+  const senators = {
+    'PC-1': {name:'Robloxian979640644',party:'Heritage Party',userId:1100178890},
+    'NE-1': {name:'AguilaBread',party:'Heritage Party',userId:22400260},
+    'AP-1': {name:'warlockings',party:'Heritage Party',userId:27886464},
+    'GF-1': {name:'Nathaniel68542',party:'Heritage Party',userId:651507021},
+    'CR-2': {name:'EdmundCarter',party:'Heritage Party',userId:31111991},
+    'GL-2': {name:'ArthurSanford',party:'Progress Party',userId:478916087}
+  };
+  const representatives = {
+    'NE-01': {name:'JXXIISAINT',party:'Heritage Party',userId:4153143495},
+    'CR-02': {name:'GatoGaviria',party:'Heritage Party',userId:176901679},
+    'MW-01': {name:'Sheev_PalpatineTGR',party:'Heritage Party',userId:76543543},
+    'GL-01': {name:'TracieMccormick6749',party:'Heritage Party',userId:10153999326},
+    'GL-02': {name:'FloridaLawRBLX',party:'Heritage Party',userId:9376858264},
+    'GF-01': {name:'Robloxian979640644',party:'Heritage Party',userId:1100178890},
+    'GF-02': {name:'Checkario',party:'Heritage Party',userId:492065733},
+    'PL-01': {name:'Pedro770679',party:'Heritage Party',userId:7225623864},
+    'PL-02': {name:'Leudobercht',party:'Heritage Party'},
+    'PL-03': {name:'EternallyBlueEyes',party:'Heritage Party',userId:165091928},
+    'AP-01': {name:'ItsYourBudCarter',party:'Heritage Party'},
+    'AP-02': {name:'Otushy117',party:'Heritage Party',userId:376958694}
+  };
+  const avatarMarkup = (person) => {
+    if (person?.userId) return '<img src="https://www.roblox.com/headshot-thumbnail/image?userId='+person.userId+'&width=150&height=150&format=png" alt="" loading="lazy" referrerpolicy="no-referrer" />';
+    const initials = (person?.name || '+').slice(0,1).toUpperCase();
+    return '<span aria-hidden="true">'+initials+'</span>';
+  };
+  const memberCard = (person,role) => '<article class="contact-member"><div class="contact-avatar">'+avatarMarkup(person)+'</div><div class="contact-member-copy"><span class="contact-role">'+role+'</span><strong>'+(person?.name || 'Seat holder not added')+'</strong><span class="contact-meta">'+(person?.party || 'Party not provided')+'</span><span class="contact-discord">Discord contact coming soon</span></div></article>';
   const makeInfo = (region) => {
     const intro = document.getElementById('network-intro');
     if (!region) {
@@ -131,8 +159,11 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     }
     if (intro) intro.hidden = true;
     info.classList.add('is-open');
-    const senateCards = region.senateClasses.map((seatClass)=>'<article class="contact-member"><div class="contact-avatar" aria-hidden="true">+</div><div class="contact-member-copy"><span class="contact-role">U.S. SENATOR · CLASS '+seatClass+'</span><strong>Seat holder not added</strong><span class="contact-meta">Party not provided</span><span class="contact-discord">Discord contact coming soon</span></div></article>').join('');
-    const repCards = Array.from({length:region.districts},(_,index)=>'<article class="contact-member"><div class="contact-avatar" aria-hidden="true">+</div><div class="contact-member-copy"><span class="contact-role">REGIONAL REPRESENTATIVE · SEAT '+(index+1)+'</span><strong>Seat holder not added</strong><span class="contact-meta">Party not provided</span><span class="contact-discord">Discord contact coming soon</span></div></article>').join('');
+    const senateCards = region.senateClasses.map((seatClass)=>memberCard(senators[region.id+'-'+seatClass], 'U.S. SENATOR · CLASS '+seatClass)).join('');
+    const repCards = Array.from({length:region.districts},(_,index)=>{
+      const seat = String(index+1).padStart(2,'0');
+      return memberCard(representatives[region.id+'-'+seat], 'U.S. REPRESENTATIVE · H-'+region.id+'-'+seat);
+    }).join('');
     info.innerHTML='<div class="directory-heading"><div><span class="directory-kicker">CONTACT YOUR REPRESENTATIVE</span><h3>'+region.name+' <span>REGION</span></h3></div><span class="directory-region-mark" style="--region-color:'+region.color+'">'+region.id+'</span></div><div class="contact-group"><div class="contact-group-title">U.S. SENATE</div><div class="contact-member-list">'+senateCards+'</div></div><div class="contact-group"><div class="contact-group-title">U.S. HOUSE</div><div class="contact-member-list">'+repCards+'</div></div>';
   };
   const setSelected = (region) => {
