@@ -135,7 +135,6 @@ document.querySelectorAll('a[href="#support"], a[href="#shop"], a[href="#voter-g
     'MW-01': {name:'Sheev_PalpatineTGR',party:'Heritage Party',userId:76543543},
     'GL-01': {name:'TracieMccormick6749',party:'Heritage Party',userId:10153999326},
     'GL-02': {name:'FloridaLawRBLX',party:'Heritage Party',userId:9376858264},
-    'GF-01': {name:'Robloxian979640644',party:'Heritage Party',userId:1100178890},
     'GF-02': {name:'Checkario',party:'Heritage Party',userId:492065733},
     'PL-01': {name:'Pedro770679',party:'Heritage Party',userId:7225623864},
     'PL-02': {name:'Leudobercht',party:'Heritage Party'},
