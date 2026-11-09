@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="description" content="Learn about Politickin', our mission, and the people behind the platform." />
+  <title>About | Politickin'</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .about-page{background:#000;color:#fff}
+    .about-hero{padding:clamp(64px,9vw,124px) 28px 54px;background:#000}
+    .about-inner{width:min(1080px,calc(100% - 44px));margin:0 auto}
+    .about-kicker{font:800 11px 'Montserrat',sans-serif;letter-spacing:.2em;color:#aaa;margin:0 0 22px}
+    .about-hero h1{max-width:950px;margin:0;color:#fff;font:900 clamp(46px,8vw,94px)/.94 'Montserrat',sans-serif;letter-spacing:-.075em}
+    .about-rule{width:7em;height:7px;background:#ddd;margin:28px 0 26px}
+    .about-lede{max-width:760px;color:#d1d1d1;font:500 clamp(17px,2vw,21px)/1.7 'Montserrat',sans-serif}
+    .about-section{padding:66px 0;border-top:1px solid #292929}
+    .about-section h2{margin:0 0 22px;font:900 clamp(27px,4vw,42px)/1.05 'Montserrat',sans-serif;letter-spacing:-.05em}
+    .about-section p{max-width:800px;color:#c9c9c9;font:400 15px/1.9 'Montserrat',sans-serif}
+    .about-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#333;border:1px solid #333;margin-top:34px}
+    .about-value{background:#080808;padding:25px 23px;min-height:175px}
+    .about-value span{display:block;color:#888;font:800 10px 'Montserrat',sans-serif;letter-spacing:.16em;margin-bottom:18px}
+    .about-value h3{margin:0 0 10px;font:800 17px 'Montserrat',sans-serif}
+    .about-value p{font-size:12px;line-height:1.75;margin:0}
+    .about-founder{display:grid;grid-template-columns:minmax(220px,330px) 1fr;gap:clamp(28px,6vw,76px);align-items:center}
+    .about-founder img{width:100%;height:330px;object-fit:cover;object-position:center 30%;filter:grayscale(1)}
+    .about-founder .founder-label{font:800 10px 'Montserrat',sans-serif;letter-spacing:.16em;color:#aaa}
+    .about-founder h3{font:900 clamp(25px,3vw,34px)/1.1 'Montserrat',sans-serif;margin:10px 0}
+    .about-connect{background:#f2f2f2;color:#050505;padding:58px 0}
+    .about-connect h2{color:#050505}
+    .about-connect p{color:#444}
+    .nav-social{display:flex;align-items:center;gap:12px;margin-top:25px}
+    .nav-social a{width:42px;height:42px;display:grid;place-items:center;border:1px solid #777;color:#050505;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+    .nav-social a:hover{background:#050505;color:#fff;border-color:#050505}
+    .nav-social img{width:18px;height:18px;object-fit:contain;display:block}
+    @media(max-width:700px){.about-values{grid-template-columns:1fr}.about-value{min-height:0}.about-founder{grid-template-columns:1fr}.about-founder img{max-width:330px;height:300px}.about-hero{padding-top:58px}}
+  </style>
+</head>
+<body class="about-page">
+<header class="site-header">
+  <a class="wordmark" href="./index.html" aria-label="Politickin home"><img class="header-logo" src="./Politickin%27%20WHITE.png" alt="Politickin’" /></a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="main-nav" aria-label="Main navigation">
+    <div class="nav-dropdown"><a class="nav-link" href="./news-analysis.html" aria-haspopup="true" aria-expanded="false">News + Analysis</a><div class="nav-dropdown-menu"><a href="./submit-op-ed.html">Submit an Op-Ed</a></div></div>
+    <span class="nav-link nav-coming-soon"><span class="nav-coming-title">Podcast</span><span class="nav-coming-label">COMING SOON</span></span>
+    <span class="nav-link nav-coming-soon"><span class="nav-coming-title">The Peoples House</span><span class="nav-coming-label">COMING SOON</span></span>
+    <span class="nav-link nav-coming-soon"><span class="nav-coming-title">Polls</span><span class="nav-coming-label">COMING SOON</span></span>
+    <a class="nav-link is-active" href="./about.html" aria-current="page">About</a>
+  </nav>
+  <div class="header-actions"><a class="btn btn-light btn-small" href="./index.html#support">DONATE</a><a class="btn btn-outline btn-small" href="./writer-portal.html">SIGN UP</a></div>
+</header>
+<main>
+  <section class="about-hero">
+    <div class="about-inner">
+      <p class="about-kicker">WHO WE ARE</p>
+      <h1>POLITICS IS<br/>EVERYONE'S BUSINESS.</h1>
+      <div class="about-rule" aria-hidden="true"></div>
+      <p class="about-lede">Politickin' is an independent platform built to make politics more accessible, bring people into the conversation, and help communities hold the people in power accountable.</p>
+    </div>
+  </section>
+  <section class="about-section">
+    <div class="about-inner">
+      <p class="about-kicker">OUR PURPOSE</p>
+      <h2>INFORMED COMMUNITIES<br/>ARE STRONGER COMMUNITIES.</h2>
+      <p>Political decisions shape everyday life — from the services people rely on to the rights and opportunities that shape their futures. Understanding those decisions shouldn't feel out of reach. Politickin' aims to make the issues, the people, and the stakes easier to follow so more people can take part in the conversation.</p>
+      <div class="about-values">
+        <article class="about-value"><span>01 / ACCESS</span><h3>Make it understandable.</h3><p>Present political issues in a clear, approachable way so readers can better understand what is happening and why it matters.</p></article>
+        <article class="about-value"><span>02 / ACCOUNTABILITY</span><h3>Ask the hard questions.</h3><p>Encourage scrutiny of public decisions and keep attention on the people entrusted with representing their communities.</p></article>
+        <article class="about-value"><span>03 / PARTICIPATION</span><h3>Bring more voices in.</h3><p>Make room for people to learn, share perspectives, and engage with the issues that affect them.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="about-section">
+    <div class="about-inner about-founder">
+      <img src="./0H8kqzoh_400x400.jpg" alt="Portrait of Politickin' founder 4S1MOLT" />
+      <div>
+        <p class="about-kicker">THE PERSON BEHIND THE PLATFORM</p>
+        <h3>BUILT TO GET PEOPLE TALKING.</h3>
+        <p>Politickin' was created by 4S1MOLT with a simple idea: politics should be easier to understand and open to everyone. The goal is to build a place where people can stay informed, exchange ideas, and pay closer attention to the decisions shaping their future.</p>
+        <p class="founder-label">4S1MOLT · FOUNDER / OWNER</p>
+      </div>
+    </div>
+  </section>
+  <section class="about-connect">
+    <div class="about-inner">
+      <p class="about-kicker">STAY CONNECTED</p>
+      <h2>BE PART OF THE CONVERSATION.</h2>
+      <p>Join the community and follow along with Politickin' beyond the website.</p>
+      <div class="nav-social" aria-label="Social links">
+        <a href="https://discord.gg/9B9HCPXgNg" aria-label="Discord" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M19.7 5.3A18.5 18.5 0 0 0 15.2 4l-.6 1.2a17 17 0 0 0-5.2 0L8.8 4a18.5 18.5 0 0 0-4.5 1.3C1.5 9.5.7 13.6 1.1 17.6a18.2 18.2 0 0 0 5.5 2.8l1.2-2a11.8 11.8 0 0 1-1.9-.9l.5-.4a13.2 13.2 0 0 0 11.2 0l.5.4a11.8 11.8 0 0 1-1.9.9l1.2 2a18.2 18.2 0 0 0 5.5-2.8c.5-4.6-.8-8.7-3.2-12.3ZM8.8 14.8c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm6.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+        </a>
+        <a href="https://republicrx.app/@AmentAmour" aria-label="RepublicRx" target="_blank" rel="noopener noreferrer"><img src="./REPUBLIC%20LOGO.png" alt=""/></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer politickin-footer">
+  <div class="footer-centered">
+    <a class="footer-logo" href="./index.html" aria-label="Politickin' home"><img src="./Politickin%27%20WHITE.png" alt="Politickin'"/></a>
+    <div class="footer-legal"><p>© 2026 POLITICKIN'. All rights reserved.</p></div>
+  </div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="./script.js"></script>
+</body>
+</html>
