@@ -1420,3 +1420,8 @@ body:has(.news-analysis-hero) .national-section .browse-btn{
 }
 
 .contact-avatar img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+/* Article body typography is intentionally locked to Montserrat. */
+.article-detail-content,.article-detail-content p,.article-detail-content li,.article-detail-content blockquote,.past-op-ed-full,.past-op-ed-full p,.past-op-ed-full li{font-family:Montserrat,sans-serif!important}
+.article-detail-content p,.article-detail-content li,.past-op-ed-full p,.past-op-ed-full li{line-height:1.85}
+.article-detail-content h2,.article-detail-content h3,.past-op-ed-full h2,.past-op-ed-full h3{font-family:Montserrat,sans-serif!important}
